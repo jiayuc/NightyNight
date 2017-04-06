@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/colorGrey</item>
+
+        <item name="colorControlNormal">@color/colorWhite</item>
+
+    </style>
+
+    <style name="Theme.MyTheme.TimePicker" parent="Base.TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">100sp</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="selectableItemBackground">@color/colorWhite</item>
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/colorGrey</item>
+
+        <item name="colorControlNormal">@color/colorWhite</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/colorLightGrey
+        </item>
+
+
+    </style>
+
+</resources>

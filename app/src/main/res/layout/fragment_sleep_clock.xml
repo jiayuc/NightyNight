@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_clock_setter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.huanglisa.nightynight.ClockSetterActivity"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TimePicker
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
+        style="@android:style/Widget.Material.Light.TimePicker"
+        android:headerBackground="@color/colorWhite"
+        android:numbersSelectorColor="@color/colorBlue"
+        android:headerTimeTextAppearance="@style/Theme.MyTheme.TimePicker"
+        android:elevation="0dp"
+        android:numbersBackgroundColor="@color/colorWhite"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="20dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <Button
+            android:text="Next"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:layout_width="200dp"
+            android:layout_marginBottom="67dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:gravity="center" />
+    </RelativeLayout>
+
+</LinearLayout>

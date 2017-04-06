@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <TextView
+        android:text="Building"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buildingName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/friendList_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:scrollbars="horizontal"
+        android:translationY="80dp"
+        android:translationX="30dp">
+    </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <Button
+            android:text="+"
+            android:id="@+id/addButton"
+            android:elevation="24dp"
+            android:layout_height="56dp"
+            android:layout_width="56dp"
+            android:layout_alignEnd="@+id/sleepTime"
+            android:background="@drawable/round_button"
+            android:textColor="#ffeeeeee"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="450dp"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_individual"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.huanglisa.nightynight.individualActivity"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile_background"
+        android:scaleY="1.3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="230dp"
+        android:translationY="-60dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/profile"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lisa Huang"
+            android:id="@+id/name"
+            android:textSize="24sp"
+            android:textColorLink="@color/colorWhite"
+            android:textColor="@color/colorWhite" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status:"
+                android:textSize="14sp"
+                android:textColorLink="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sleeping"
+                android:id="@+id/status"
+                android:textSize="14sp"
+                android:textColorLink="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:id="@+id/follower_num"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:paddingRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="followers"
+                android:id="@+id/follower"
+                android:textSize="14sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginRight="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30"
+                android:id="@+id/following_num"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="following"
+                android:id="@+id/followings"
+                android:textSize="14sp"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingRight="0dp"
+        android:theme="@style/ToolbarTheme" />
+    <LinearLayout
+        android:layout_width="300dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_height="300dp"
+        android:paddingTop="5dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_building"
+                android:tint="#1f2c4e"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:paddingLeft="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="view the building"
+                android:id="@+id/link_building"
+                android:textSize="20sp"
+                android:textColor="#1f2c4e"
+                android:paddingLeft="40dp"
+                android:paddingTop="5dp">
+
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorControlHighlight"
+            android:elevation="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_phone_call"
+                android:tint="#1f2c4e"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:paddingLeft="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="make a call"
+                android:id="@+id/link_message"
+                android:textSize="20sp"
+                android:textColor="#1f2c4e"
+                android:paddingLeft="40dp"
+                android:paddingTop="5dp">
+
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="391dp"
+            android:layout_height="1dp"
+            android:background="?attr/colorControlHighlight"
+            android:scaleX="1.5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sms_message"
+                android:tint="#1f2c4e"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:paddingLeft="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="send message"
+                android:id="@+id/link_call"
+                android:textSize="20sp"
+                android:textColor="#1f2c4e"
+                android:paddingLeft="40dp"
+                android:paddingTop="5dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorControlHighlight" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_nightcap"
+                android:tint="#1f2c4e"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:paddingLeft="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="check sleeping status"
+                android:id="@+id/link_sleep"
+                android:textSize="20sp"
+                android:textColor="#1f2c4e"
+                android:paddingLeft="40dp"
+                android:paddingTop="5dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorControlHighlight" />
+
+    </LinearLayout>
+
+</RelativeLayout>

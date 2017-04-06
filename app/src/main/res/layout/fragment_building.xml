@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/night_gradient"
+    android:orientation="vertical" >
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="20dp"
+        android:translationY="100dp"
+        />
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="200dp"
+        android:translationY="40dp"
+        />
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="250dp"
+        android:translationY="130dp"
+        />
+
+    <HorizontalScrollView
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+
+            <ImageView
+                android:src="@drawable/building1_levels"
+                android:id="@+id/building3"
+                android:layout_width="154dp"
+                android:layout_height="376dp"
+                android:clickable="true"
+                android:layout_gravity="bottom"
+                />
+
+            <ImageView
+                android:src="@drawable/building2_levels"
+                android:id="@+id/building4"
+                android:layout_width="182dp"
+                android:layout_height="449dp"
+                android:clickable="true"
+                android:layout_gravity="bottom"
+                 />
+
+            <ImageView
+            android:src="@drawable/building2_levels"
+            android:id="@+id/building2"
+            android:layout_width="182dp"
+            android:layout_height="449dp"
+            android:clickable="true"
+            android:layout_gravity="bottom"
+            android:translationX="100dp" />
+
+            <ImageView
+                android:src="@drawable/building1_levels"
+                android:id="@+id/building1"
+                android:layout_width="154dp"
+                android:layout_height="376dp"
+                android:clickable="true"
+                android:layout_gravity="bottom"
+                android:translationX="-200dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>
+

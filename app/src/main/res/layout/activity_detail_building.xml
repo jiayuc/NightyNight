@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_building"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:background="@drawable/night_gradient"
+    tools:context="com.example.huanglisa.nightynight.DetailBuildingActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ToolbarTheme"
+        android:paddingRight="0dp"
+        />
+
+
+
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="30dp"
+        android:translationY="150dp"
+        />
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="200dp"
+        android:translationY="60dp"
+        />
+    <ImageView
+        android:src="@drawable/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="320dp"
+        android:translationY="180dp"
+        />
+
+    <ImageView
+        android:src="@drawable/detail_building"
+        android:id="@+id/detailBuilding"
+        android:layout_width="wrap_content"
+        android:layout_height="478dp"
+        android:clickable="true"
+        android:layout_gravity="bottom|center_horizontal"
+        />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain1"
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="65dp"
+        android:translationY="120dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain2"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="65dp"
+        android:translationY="390dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain3"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="65dp"
+        android:translationY="300dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain4"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="65dp"
+        android:translationY="490dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain5"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="65dp"
+        android:translationY="210dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain6"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="154dp"
+        android:translationY="120dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain7"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="154dp"
+        android:translationY="390dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain8"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="154dp"
+        android:translationY="300dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain9"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="154dp"
+        android:translationY="490dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain10"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="154dp"
+        android:translationY="210dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain11"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="245dp"
+        android:translationY="120dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain12"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="245dp"
+        android:translationY="390dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain13"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="245dp"
+        android:translationY="300dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain14"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="245dp"
+        android:translationY="490dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1" />
+
+    <ImageView
+        android:src="@drawable/curtain"
+        android:id="@+id/curtain15"
+
+        android:layout_width="49dp"
+        android:layout_height="67dp"
+        android:clickable="true"
+        android:translationX="245dp"
+        android:translationY="210dp"
+        android:scaleX="0.8"
+        android:scaleY="1.1"
+        android:elevation="21dp" />
+
+
+
+
+
+</FrameLayout>

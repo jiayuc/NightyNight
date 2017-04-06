@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:text="Add New Friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorControlHighlight" />
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/friend_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGrey"
+        android:hint="email address"
+        android:textSize="24dp"
+        android:gravity="center"
+        android:height="70dp"
+        android:background="@null"/>
+
+    <TextView
+        android:text="type in email address to see if your friend is using this app."
+        android:textSize="12sp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/explanation"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp" />
+</LinearLayout>

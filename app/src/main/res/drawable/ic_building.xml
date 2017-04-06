@@ -1,0 +1,6 @@
+<vector
+    android:tint="#ffeeeeee"
+    android:height="24dp" android:viewportHeight="512"
+    android:viewportWidth="512" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#000" android:name="Forma 1" android:pathData="m481 481v-288h-224v-192h-224v480h-32v32h512v-32h-32zm-416 -448h64v64h-64v-64zm0 96h64v64h-64v-64zm0 96h64v64h-64v-64zm0 96h64v64h-64v-64zm128 160h-96v-64h96v64zm32 -96h-64v-64h64v64zm0 -96h-64v-64h64v64zm0 -96h-64v-64h64v64zm0 -96h-64v-64h64v64zm64 128h64v64h-64v-64zm0 96h64v64h-64v-64zm128 160h-96v-64h96v64zm32 -96h-64v-64h64v64zm0 -96h-64v-64h64v64z"/>
+</vector>

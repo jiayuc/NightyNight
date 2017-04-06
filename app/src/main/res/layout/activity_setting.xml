@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_individual"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.huanglisa.nightynight.individualActivity"
+    android:gravity="center_horizontal"
+    android:background="#EEEEEE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="18dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/profile"
+
+            />
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:translationY="-40dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/change_pic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/instagram_logo" />
+        </RelativeLayout>
+    </LinearLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingRight="0dp"
+        android:theme="@style/ToolbarTheme" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_height="350dp"
+        android:paddingTop="5dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorWhite"
+            android:id="@+id/statusBlock">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"
+
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="30dp"
+                android:gravity="center_vertical"
+                android:id="@+id/statusText"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="current status"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userStatus"
+                    android:gravity="center_vertical"
+                    android:text="awake"
+                    android:paddingTop="5dp"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="20dp"
+                android:checked="true"
+                android:id="@+id/statusSwitch"
+                android:theme="@style/SCBSwitch"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c1c1c1"
+                android:layout_alignBottom="@id/statusText"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By toggling the switch you can change your current status. When it's on, it means that you are awake now "
+            android:padding="15dp"
+            android:paddingStart="30dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"
+                android:id="@+id/nameBlock"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/userName"
+                android:hint="name"
+                android:gravity="center_vertical"
+                android:paddingStart="30dp"
+                android:textSize="18sp"
+                android:background="@color/colorWhite"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:scaleY="0.6"
+                android:scaleX="0.6"
+                android:src="@drawable/pencil"
+                android:paddingRight="30dp"
+                android:layout_alignRight="@id/nameBlock"
+                android:id="@+id/editName"
+                android:clickable="true"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c1c1c1"
+                android:layout_alignBottom="@id/userName"
+                />
+        </RelativeLayout>
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorWhite"
+            android:id="@+id/addressBlock"
+            android:layout_marginTop="10dp"
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"
+
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="30dp"
+                android:gravity="center_vertical"
+                android:id="@+id/addressText"
+                android:paddingEnd="35dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="address"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userAddress"
+                    android:gravity="center_vertical"
+                    android:text="412 w elms street, urbana, IL, 61801"
+                    android:paddingTop="5dp"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:scaleY="0.6"
+                android:scaleX="0.6"
+                android:src="@drawable/pencil"
+                android:paddingRight="30dp"
+                android:layout_alignEnd="@id/addressText"
+                android:id="@+id/editAddress"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c1c1c1"
+                android:layout_alignBottom="@id/addressText"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorWhite"
+            android:id="@+id/phoneBlock"
+            android:layout_marginTop="10dp"
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"
+
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="30dp"
+                android:gravity="center_vertical"
+                android:id="@+id/phoneText"
+                android:paddingEnd="35dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="phone"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userPhone"
+                    android:gravity="center_vertical"
+                    android:text="(610)-618-0076"
+                    android:paddingTop="5dp"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:scaleY="0.6"
+                android:scaleX="0.6"
+                android:src="@drawable/pencil"
+                android:paddingRight="30dp"
+                android:layout_alignEnd="@id/phoneText"
+                android:id="@+id/editPhone"
+                android:clickable="true"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c1c1c1"
+                android:layout_alignBottom="@id/phoneText"
+                />
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

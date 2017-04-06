@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/empty"
+        android:orderInCategory="600"
+        app:showAsAction="always"
+        android:title="collapse"
+        android:icon="@drawable/ic_sysbar_menu">
+
+        <menu>
+            <item android:id="@+id/action_setting"
+                android:title="setting"
+                android:icon="@android:drawable/ic_menu_preferences"
+                app:showAsAction="ifRoom" />
+
+            <item android:id="@+id/action_logout"
+                android:title="log out"
+                android:icon="@android:drawable/ic_menu_help"
+                app:showAsAction="ifRoom" />
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/action_building"
+        android:orderInCategory="200"
+        android:title="Search"
+        android:icon="@drawable/ic_building"
+        app:showAsAction="ifRoom"
+        ></item>
+    <item
+        android:id="@+id/action_clock"
+        android:orderInCategory="300"
+        android:title="User"
+        android:icon="@drawable/ic_alarm_clock"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/action_users"
+        android:orderInCategory="400"
+        android:title="User"
+        android:icon="@drawable/ic_multiple_users_silhouette"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/action_message"
+        android:orderInCategory="500"
+        android:title="User"
+        android:icon="@drawable/ic_close_envelope"
+        app:showAsAction="ifRoom"></item>
+
+</menu>
