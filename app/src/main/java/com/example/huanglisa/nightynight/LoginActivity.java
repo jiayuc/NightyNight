@@ -17,8 +17,11 @@ import com.example.huanglisa.nightynight.rest.UserApiInterface;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
-        _emailText = (EditText)findViewById(R.id.input_email);
-        _passwordText = (EditText)findViewById(R.id.input_password);
-        _loginButton = (Button)findViewById(R.id.btn_login);
-        _signupLink = (TextView)findViewById(R.id.link_signup);
+        _emailText = (EditText) findViewById(R.id.input_email);
+        _passwordText = (EditText) findViewById(R.id.input_password);
+        _loginButton = (Button) findViewById(R.id.btn_login);
+        _signupLink = (TextView) findViewById(R.id.link_signup);
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -84,31 +87,32 @@ public class LoginActivity extends AppCompatActivity {
         String input_email = _emailText.getText().toString();
         String input_password = _passwordText.getText().toString();
 
-
-        Call<User> call = userApiInterface.userLogIn(input_email, input_password);
-        call.enqueue(new Callback<User>() {
+        Call < User > call = userApiInterface.userLogIn(input_email, input_password);
+        call.enqueue(new Callback < User > () {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
-//                    Log.e(TAG, "failed to login, from userApiInterface");
-                    try{
+            public void onResponse(Call < User > call, Response < User > response) {
+                Log.d(TAG, "onResponse");
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "failed to login, from userApiInterface");
+                    try {
                         onLoginFail(response.errorBody().string());
                     } catch (Exception e) {
+                        Log.e(TAG, "failed to login: exception,, from userApiInterface");
                         onLoginFail(null);
                     } finally {
                         return;
                     }
                 }
                 System.out.format("token: %s%n", response.body().token);
-                Call<List<ReceivedBuilding>> buildingCall  = buildingApiInterface.getBuildings(response.body().token);
-                buildingCall.enqueue(new Callback<List<ReceivedBuilding>>() {
+                Call < List < ReceivedBuilding >> buildingCall = buildingApiInterface.getBuildings(response.body().token);
+                buildingCall.enqueue(new Callback < List < ReceivedBuilding >> () {
                     @Override
-                    public void onResponse(Call<List<ReceivedBuilding>> call, Response<List<ReceivedBuilding>> response) {
-                        if(!response.isSuccessful()){
+                    public void onResponse(Call < List < ReceivedBuilding >> call, Response < List < ReceivedBuilding >> response) {
+                        if (!response.isSuccessful()) {
                             Log.e(TAG, "failed to get building list");
-                            try{
+                            try {
                                 Log.e(TAG, response.errorBody().string());
-                            }catch(IOException e){
+                            } catch (IOException e) {
                                 Log.e(TAG, e.getMessage());
                             }
                             return;
@@ -118,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<List<ReceivedBuilding>> call, Throwable t) {
+                    public void onFailure(Call < List < ReceivedBuilding >> call, Throwable t) {
                         Log.e(TAG, "failed to get building list (onFailure)");
                         System.out.format(t.getMessage());
                     }
@@ -127,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call < User > call, Throwable t) {
                 Log.d(TAG, "onFailure");
                 Log.e(TAG, t.toString());
                 onLoginFail(null);
@@ -141,11 +145,9 @@ public class LoginActivity extends AppCompatActivity {
     public void login(String signupEmail, String signupName, String token, String password) {
         Log.d(TAG, "Login");
 
-
         _loginButton.setEnabled(false);
 
         //find existed account with signupEmail and password
-
         onLoginSucess(signupEmail, signupName, token, password);
 
     }
@@ -157,8 +159,6 @@ public class LoginActivity extends AppCompatActivity {
 
         session.createLoginSession(name, email, token, password);
 
-
-
         setResult(RESULT_OK, null);
         finish();
     }
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
     //indicate user log in failed
     public void onLoginFail(String message) {
         String text = "Login failed";
-        if(message != null){
+        if (message != null) {
             text = message;
         }
         Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 login(data.getExtras().getString("email"), data.getExtras().getString("password"), data.getExtras().getString("token"), data.getExtras().getString("password"));
             }
-            if(resultCode == RESULT_CANCELED){
+            if (resultCode == RESULT_CANCELED) {
                 System.out.format("get here");
             }
         }
@@ -193,6 +193,4 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
 }
-

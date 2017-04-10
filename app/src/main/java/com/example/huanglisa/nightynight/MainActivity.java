@@ -1,9 +1,12 @@
 package com.example.huanglisa.nightynight;
 
 import com.microsoft.windowsazure.mobileservices.*;
+import com.microsoft.windowsazure.mobileservices.table.*;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,22 +15,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.net.MalformedURLException;
-
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
+
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     private MobileServiceClient mClient;
     SessionManager session;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //connent to server
-        try
-        {
-            mClient = new MobileServiceClient("https://nightynight.azurewebsites.net", this);
-        }
-        catch(MalformedURLException ex)
-        {
+        try {
+            mClient = new MobileServiceClient("https://nighty-night.azurewebsites.net", this);
+        } catch (MalformedURLException ex) {
             Log.e("Service URL malformed!", ex.getMessage());
         }
 
@@ -82,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_building:
-               createTabIntent(0);
+                createTabIntent(0);
                 break;
             case R.id.action_clock:
                 createTabIntent(1);
@@ -106,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void createTabIntent(int index){
-        ((ViewPager)findViewById(R.id.pager)).setCurrentItem(index);
+    private void createTabIntent(int index) {
+        ((ViewPager) findViewById(R.id.pager)).setCurrentItem(index);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 

@@ -4,7 +4,9 @@ package com.example.huanglisa.nightynight.rest;
  * Created by huanglisa on 11/13/16.
  */
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Body;
@@ -17,6 +19,9 @@ import com.example.huanglisa.nightynight.ClockItem;
 import com.example.huanglisa.nightynight.ReceivedClock;
 import com.example.huanglisa.nightynight.ReceivedFriend;
 import com.example.huanglisa.nightynight.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public interface UserApiInterface {
 
