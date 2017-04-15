@@ -20,12 +20,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -39,12 +48,19 @@ public class LoginActivity extends AppCompatActivity {
     SessionManager session;
     private UserApiInterface userApiInterface;
     private BuildingApiInterface buildingApiInterface;
+
+    CallbackManager callbackManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         //set theme, transition from splash page
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        // facebook login, logging
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplication());
+        // must be after two fb lines
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_login);
 
         //API
@@ -54,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         // Session Manager for user management
         session = new SessionManager(getApplicationContext());
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+
 
         _emailText = (EditText) findViewById(R.id.input_email);
         _passwordText = (EditText) findViewById(R.id.input_password);
@@ -76,6 +93,35 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
+
+        // register facebook login cb
+        callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(final LoginResult loginResult) {
+                        Log.e(TAG, "Login success!!");
+                        //TODO: Use the Profile class to get information about the current user.
+                        handleSignInResult(new Callable<Void>() {
+                            @Override
+                            public Void call() throws Exception {
+                                LoginManager.getInstance().logOut();
+                                return null;
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        handleSignInResult(null);
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.e(LoginActivity.class.getCanonicalName(), error.getMessage());
+                        handleSignInResult(null);
+                    }
+                });
     }
 
     //log in when user text input
@@ -87,10 +133,10 @@ public class LoginActivity extends AppCompatActivity {
         String input_email = _emailText.getText().toString();
         String input_password = _passwordText.getText().toString();
 
-        Call < User > call = userApiInterface.userLogIn(input_email, input_password);
-        call.enqueue(new Callback < User > () {
+        Call<User> call = userApiInterface.userLogIn(input_email, input_password);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call < User > call, Response < User > response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "onResponse");
                 if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to login, from userApiInterface");
@@ -104,10 +150,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 System.out.format("token: %s%n", response.body().token);
-                Call < List < ReceivedBuilding >> buildingCall = buildingApiInterface.getBuildings(response.body().token);
-                buildingCall.enqueue(new Callback < List < ReceivedBuilding >> () {
+                Call<List<ReceivedBuilding>> buildingCall = buildingApiInterface.getBuildings(response.body().token);
+                buildingCall.enqueue(new Callback<List<ReceivedBuilding>>() {
                     @Override
-                    public void onResponse(Call < List < ReceivedBuilding >> call, Response < List < ReceivedBuilding >> response) {
+                    public void onResponse(Call<List<ReceivedBuilding>> call, Response<List<ReceivedBuilding>> response) {
                         if (!response.isSuccessful()) {
                             Log.e(TAG, "failed to get building list");
                             try {
@@ -122,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call < List < ReceivedBuilding >> call, Throwable t) {
+                    public void onFailure(Call<List<ReceivedBuilding>> call, Throwable t) {
                         Log.e(TAG, "failed to get building list (onFailure)");
                         System.out.format(t.getMessage());
                     }
@@ -131,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call < User > call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.d(TAG, "onFailure");
                 Log.e(TAG, t.toString());
                 onLoginFail(null);
@@ -184,6 +230,8 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.format("get here");
             }
         }
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -192,5 +240,10 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-
+    //    helper
+    public void handleSignInResult(Callable<Void> callable) {
+        System.out.print("In handleSignInResult");
+    }
 }
+
+
