@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
-import com.example.huanglisa.nightynight.rest.ApiClient;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,29 +22,22 @@ import retrofit2.Response;
  */
 
 public class SessionManager {
-    //shared preferences
-    SharedPreferences pref;
-
-    //editor for shared preference
-    SharedPreferences.Editor editor;
-
-    //context
-    Context _context;
-
-    //shared pref mode
-    int PRIVATE_MODE = 0;
-
-    private static final String PREF_NAME = "AndroidHivePref";
-    private static final String IS_LOGIN ="isLoggedIn";
-
-    private static final String TAG = "SessionManager";
-
     public static final String KEY_NAME = "name";
-    public static final String KEY_EMAIL ="email";
-    public static final String KEY_TOKEN ="token";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_TOKEN = "token";
     public static final String KEY_BUILDINGS = "buildings";
     public static final String KEY_PASSWORD = "password";
-
+    private static final String PREF_NAME = "AndroidHivePref";
+    private static final String IS_LOGIN = "isLoggedIn";
+    private static final String TAG = "SessionManager";
+    //shared preferences
+    SharedPreferences pref;
+    //editor for shared preference
+    SharedPreferences.Editor editor;
+    //context
+    Context _context;
+    //shared pref mode
+    int PRIVATE_MODE = 0;
     private UserApiInterface userApiInterface;
     private BuildingApiInterface buildingApiInterface;
 
@@ -62,7 +53,7 @@ public class SessionManager {
         return pref.getString(KEY_TOKEN, "");
     }
 
-    //create login session
+    //create loginNative session
     public void createLoginSession(String name, String email, String token, String password){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
@@ -74,8 +65,7 @@ public class SessionManager {
     }
 
 
-
-    //create new login page if not log in
+    //create new loginNative page if not log in
     public void checkLogin(){
         if(!this.isLoggedIn()){
             Intent intent = new Intent(_context, LoginActivity.class);
@@ -160,7 +150,7 @@ public class SessionManager {
     }
 
     /**
-     * Quick check for login
+     * Quick check for loginNative
      * **/
     // Get Login State
     public boolean isLoggedIn(){

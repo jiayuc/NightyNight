@@ -4,30 +4,31 @@ package com.example.huanglisa.nightynight.rest;
  * Created by huanglisa on 11/13/16.
  */
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.FieldMap;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.PUT;
-import retrofit2.http.GET;
-import retrofit2.http.FormUrlEncoded;
-
-import com.example.huanglisa.nightynight.ClockItem;
 import com.example.huanglisa.nightynight.ReceivedClock;
 import com.example.huanglisa.nightynight.ReceivedFriend;
 import com.example.huanglisa.nightynight.User;
 
-import java.util.HashMap;
-import java.util.Map;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+
 
 public interface UserApiInterface {
 
     @FormUrlEncoded
     @POST("user")
+        //TODO: change naming later to /...
     Call <User> userLogIn(@Field("email") String email, @Field("password") String password);
+
+    // Facebook loginNative API
+    @FormUrlEncoded
+    @POST("user/fb-access")
+    Call<User> userLogInViaFacebook(@Field("id") String userId, @Field("token") String accessToken);
 
     @PUT("user")
     Call <User> userSignUp(@Body User user);

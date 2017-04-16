@@ -1,10 +1,9 @@
 package com.example.huanglisa.nightynight;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,49 +13,41 @@ import android.widget.Toast;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
-
-import java.io.IOError;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-
+    SessionManager session;
+    CallbackManager callbackManager;
     //ui component
     private EditText _emailText;
     private EditText _passwordText;
     private Button _loginButton;
     private TextView _signupLink;
-    SessionManager session;
     private UserApiInterface userApiInterface;
     private BuildingApiInterface buildingApiInterface;
-
-    CallbackManager callbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         //set theme, transition from splash page
         super.onCreate(savedInstanceState);
-        // facebook login, logging
+        // facebook loginNative, logging
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(getApplication());
         // must be after two fb lines
@@ -80,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                login();
+                loginNative();
             }
         });
 
@@ -94,56 +85,56 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // register facebook login cb
+        // register facebook loginNative cb
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(final LoginResult loginResult) {
-                        Log.e(TAG, "Login success!!");
-                        //TODO: Use the Profile class to get information about the current user.
-                        handleSignInResult(new Callable<Void>() {
-                            @Override
-                            public Void call() throws Exception {
-                                LoginManager.getInstance().logOut();
-                                return null;
-                            }
-                        });
-                    }
+        LoginButton loginButtonFB = (LoginButton) findViewById(R.id.login_button);
+        loginButtonFB.setReadPermissions("email");
+        loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(final LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                Log.d(TAG, "Login success!!" + loginResult.toString()); // + "\n\n token" + accessToken.getToken());
+                // request user access from API
+                Call<User> call = userApiInterface.userLogInViaFacebook(accessToken.getUserId(), accessToken.getToken());
+                onUserAPIResult(call);
+            }
 
-                    @Override
-                    public void onCancel() {
-                        handleSignInResult(null);
-                    }
+            @Override
+            public void onCancel() {
+            }
 
-                    @Override
-                    public void onError(FacebookException error) {
-                        Log.e(LoginActivity.class.getCanonicalName(), error.getMessage());
-                        handleSignInResult(null);
-                    }
-                });
+            @Override
+            public void onError(FacebookException error) {
+                Log.e(LoginActivity.class.getCanonicalName(), error.getMessage());
+            }
+        });
     }
 
     //log in when user text input
-    public void login() {
-        Log.d(TAG, "Login");
-
+    public void loginNative() {
+        Log.d(TAG, "loginNative: user typed password");
         _loginButton.setEnabled(false);
 
         String input_email = _emailText.getText().toString();
         String input_password = _passwordText.getText().toString();
 
         Call<User> call = userApiInterface.userLogIn(input_email, input_password);
+        onUserAPIResult(call);
+    }
+
+
+    private void onUserAPIResult(Call<User> call) {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "onResponse");
                 if (!response.isSuccessful()) {
-                    Log.e(TAG, "failed to login, from userApiInterface");
+                    Log.e(TAG, "failed to loginNative, from userApiInterface");
                     try {
+                        System.out.print(response);
                         onLoginFail(response.errorBody().string());
                     } catch (Exception e) {
-                        Log.e(TAG, "failed to login: exception,, from userApiInterface");
+                        Log.e(TAG, "failed to loginNative: exception, from userApiInterface");
                         onLoginFail(null);
                     } finally {
                         return;
@@ -178,17 +169,16 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.d(TAG, "onFailure");
+                Log.d(TAG, "onUserAPIResult: onFailure");
                 Log.e(TAG, t.toString());
                 onLoginFail(null);
             }
-        });
-
+        });        
     }
 
     //used when email and password input
     //e.g. run after sign up
-    public void login(String signupEmail, String signupName, String token, String password) {
+    public void loginNative(String signupEmail, String signupName, String token, String password) {
         Log.d(TAG, "Login");
 
         _loginButton.setEnabled(false);
@@ -200,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //store user info
     public void onLoginSucess(String name, String email, String token, String password) {
+        System.out.print("Rest API successfully return login token: " + token);
         _loginButton.setEnabled(true);
         //!email and name will be actually returned from server
 
@@ -211,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //indicate user log in failed
     public void onLoginFail(String message) {
+        Log.i(TAG, "onLoginFail: " + message);
         String text = "Login failed";
         if (message != null) {
             text = message;
@@ -224,7 +216,7 @@ public class LoginActivity extends AppCompatActivity {
         //catch user info when sign up
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                login(data.getExtras().getString("email"), data.getExtras().getString("password"), data.getExtras().getString("token"), data.getExtras().getString("password"));
+                loginNative(data.getExtras().getString("email"), data.getExtras().getString("password"), data.getExtras().getString("token"), data.getExtras().getString("password"));
             }
             if (resultCode == RESULT_CANCELED) {
                 System.out.format("get here");
@@ -240,10 +232,4 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    //    helper
-    public void handleSignInResult(Callable<Void> callable) {
-        System.out.print("In handleSignInResult");
-    }
 }
-
-
