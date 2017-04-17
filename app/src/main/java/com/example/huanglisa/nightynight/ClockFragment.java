@@ -5,7 +5,12 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -52,6 +57,8 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     private Intent alarmWakeReceiverIntent;
     private PendingIntent pendingSleepIntent;
     private Intent alarmSleepReceiverIntent;
+
+    private Paint p = new Paint();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -210,8 +217,23 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Bitmap icon;
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+
+                    View itemView = viewHolder.itemView;
+                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                    float width = height / 3;
+
+                    if (dX <= 0) {
+                        p.setColor(Color.parseColor("#D32F2F"));
+                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                        c.drawRect(background, p);
+                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_delete_white);
+                        RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, icon_dest, p);
+                    }
+                }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                //System.out.println("onChildDraw");
             }
 
         };
@@ -326,7 +348,7 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
             @Override
             public void onResponse(Call<ReceivedClock> call1, Response<ReceivedClock> response) {
                 if(!response.isSuccessful()) {
-                    Log.e(TAG, "failed to get activated clock " + response.message());
+                    Log.e(TAG, "failed to get activated clock " + response.body());
                     progress.dismiss();
                     return;
                 }

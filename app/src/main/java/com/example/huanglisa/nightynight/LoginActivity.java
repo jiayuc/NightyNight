@@ -141,14 +141,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
-                signIn();
+                googleSignIn();
                 break;
-            // ...
         }
     }
 
-    private void signIn() {
-        System.out.print("google sign in ");
+    private void googleSignIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -296,8 +294,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             onLoginFail(acct.getDisplayName() + acct.getIdToken());
             Call<User> call = userApiInterface.userLogInViaGoogle(acct.getIdToken(), acct.getEmail());
             onUserAPIResult(call);
-//            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-//            updateUI(true);
         } else {
             Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());
             onLoginFail("google login failed: " + result.getStatus().getStatusMessage());
