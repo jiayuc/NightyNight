@@ -38,7 +38,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private static final String GOOGLE_CLIENT_ID = "803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com";
+    private static final String GOOGLE_CLIENT_ID = "803304289559-atpfnn6je36a6qv1q60boe1qds492j8m.apps.googleusercontent.com";
     private static final int RC_SIGN_IN = 1;
     SessionManager session;
     CallbackManager callbackManager;
@@ -62,8 +62,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(GOOGLE_CLIENT_ID) // pass the OAuth 2.0 client ID that was created for server
                 .requestEmail()
+                .requestId()
+                .requestIdToken(GOOGLE_CLIENT_ID) // pass the OAuth 2.0 client ID that was created for server
                 .build();
 
         // must be after two fb lines
@@ -108,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onSuccess(final LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
-                Log.d(TAG, "Login success!!" + loginResult.toString()); // + "\n\n token" + accessToken.getToken());
+                Log.d(TAG, "Front end fb Login success, " + loginResult.toString()); // + "\n\n token" + accessToken.getToken());
                 // request user access from API
                 Call<User> call = userApiInterface.userLogInViaFacebook(accessToken.getUserId(), accessToken.getToken());
                 onUserAPIResult(call);
@@ -176,12 +177,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "onResponse");
                 if (!response.isSuccessful()) {
-                    Log.e(TAG, "failed to loginNative, from userApiInterface");
+                    Log.e(TAG, "failed to login, from userApiInterface");
                     try {
-                        System.out.print(response);
+                        Log.e(TAG, response.toString());
                         onLoginFail(response.errorBody().string());
                     } catch (Exception e) {
-                        Log.e(TAG, "failed to loginNative: exception, from userApiInterface");
+                        Log.e(TAG, "failed to login caused by exception, from userApiInterface");
                         onLoginFail(null);
                     } finally {
                         return;
@@ -291,8 +292,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            onLoginFail(acct.getDisplayName() + acct.getIdToken());
-            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getIdToken(), acct.getEmail());
+            Log.d(TAG, "Google front-end login success, get info: " + acct.getDisplayName() + acct.getId());
+            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getEmail(), acct.getDisplayName());
             onUserAPIResult(call);
         } else {
             Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());
