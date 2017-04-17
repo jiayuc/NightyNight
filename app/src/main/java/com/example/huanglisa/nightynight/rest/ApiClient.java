@@ -17,6 +17,17 @@ public class ApiClient {
     public static final String BASE_URL = "http://nighty-night.azurewebsites.net/api/";
     private static Retrofit retrofit = null;
 
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .client(getRequestHeader())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
     private static OkHttpClient getRequestHeader() {
         OkHttpClient client = new OkHttpClient();
         OkHttpClient clientWith30sTimeout = client.newBuilder()
@@ -25,17 +36,5 @@ public class ApiClient {
                 .connectTimeout(40, TimeUnit.SECONDS)
                 .build();
         return clientWith30sTimeout;
-    }
-
-
-    public static Retrofit getClient() {
-        if (retrofit==null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(getRequestHeader())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
     }
 }

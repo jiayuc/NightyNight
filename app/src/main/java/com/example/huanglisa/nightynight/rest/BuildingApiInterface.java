@@ -25,6 +25,6 @@ public interface BuildingApiInterface {
 
     @FormUrlEncoded
     @POST("building/item")
-    Call <ReceivedBuilding> getBuilding(@Header("x-zumo-auth") String authorization, @Field("id") String id);
+    Call<ReceivedBuilding> getBuilding(@Header("x-zumo-auth") String authorization, @Field("id") String id);
 
 }

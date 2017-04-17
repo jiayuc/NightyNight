@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.FriendApiInterface;
-import com.example.huanglisa.nightynight.rest.UserApiInterface;
 
 /**
  * Created by huanglisa on 11/20/16.
@@ -46,7 +45,7 @@ public class FriendConfirmDialog extends DialogFragment {
         session = new SessionManager(getContext().getApplicationContext());
         friendApiInterface = ApiClient.getClient().create(FriendApiInterface.class);
 
-        if(getArguments() == null){
+        if (getArguments() == null) {
             System.out.format("arguments are null !!!%n");
         }
         friendEmail = getArguments().getString("email");
@@ -62,15 +61,14 @@ public class FriendConfirmDialog extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        mListener = (FriendFragment)getTargetFragment();
-
+        mListener = (FriendFragment) getTargetFragment();
 
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View view = inflater.inflate(R.layout.fragment_friend_confirm_dialog, null);
-        friendEmailView = (TextView)view.findViewById(R.id.friend_email);
-        friendNameView= (TextView)view.findViewById(R.id.friend_name);
+        friendEmailView = (TextView) view.findViewById(R.id.friend_email);
+        friendNameView = (TextView) view.findViewById(R.id.friend_name);
         friendEmailView.setText(friendEmail);
         friendNameView.setText(friendName);
 

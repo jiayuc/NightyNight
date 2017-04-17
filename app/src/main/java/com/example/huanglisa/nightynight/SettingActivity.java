@@ -1,9 +1,9 @@
 package com.example.huanglisa.nightynight;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,13 +24,14 @@ import retrofit2.Response;
 
 public class SettingActivity extends AppCompatActivity {
 
-    private static final String TAG="SettingActivity";
+    private static final String TAG = "SettingActivity";
 
     private TextView name, status, address, phone;
     private String token;
     private Switch statusSwitch;
     private UserApiInterface userApiInterface;
     private ImageView editName, editPhone, editAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,33 +41,33 @@ public class SettingActivity extends AppCompatActivity {
 
         editName = (ImageView) findViewById(R.id.editName);
         editPhone = (ImageView) findViewById(R.id.editPhone);
-        editAddress =(ImageView) findViewById(R.id.editAddress);
+        editAddress = (ImageView) findViewById(R.id.editAddress);
 
         name = (TextView) findViewById(R.id.userName);
         status = (TextView) findViewById(R.id.userStatus);
-        address  = (TextView) findViewById(R.id.userAddress);
-        phone =(TextView) findViewById(R.id.userPhone);
-        statusSwitch = (Switch)findViewById(R.id.statusSwitch);
+        address = (TextView) findViewById(R.id.userAddress);
+        phone = (TextView) findViewById(R.id.userPhone);
+        statusSwitch = (Switch) findViewById(R.id.statusSwitch);
         Intent intent = getIntent();
         token = intent.getExtras().getString("token");
         getUserInfo(token);
 
 
-        editName.setOnClickListener(new View.OnClickListener(){
+        editName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.v(TAG, " click name edit");
                 generateEditingDialog("name");
             }
         });
 
-        editPhone.setOnClickListener(new View.OnClickListener(){
+        editPhone.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.v(TAG, " click phone edit");
                 generateEditingDialog("phone");
             }
         });
 
-        editAddress.setOnClickListener(new View.OnClickListener(){
+        editAddress.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.v(TAG, " click address edit");
                 generateEditingDialog("address");
@@ -88,20 +89,15 @@ public class SettingActivity extends AppCompatActivity {
         toolBar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
     }
 
-    public void generateEditingDialog(String type){
-        DialogFragment dialog = UserInfoEditingDialog.newInstance(type);
-        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
-    }
-
-    public void getUserInfo(String token){
+    public void getUserInfo(String token) {
         Call<User> call = userApiInterface.getUserInfo(token);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
-                    try{
+                if (!response.isSuccessful()) {
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch (IOException e){
+                    } catch (IOException e) {
                         Log.e(TAG, e.getMessage());
                     } finally {
                         return;
@@ -120,30 +116,22 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return true;
+
+    public void generateEditingDialog(String type) {
+        DialogFragment dialog = UserInfoEditingDialog.newInstance(type);
+        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
-    public String convertStatus(boolean isAwake){
-        statusSwitch.setChecked(isAwake);
-        if(isAwake){
-            return "awake";
-        } else {
-            return "sleep";
-        }
-    }
-
-    public void changeUserStatus(boolean curStatus){
+    public void changeUserStatus(boolean curStatus) {
         Call<User> call = userApiInterface.userUpdateStatus(token, curStatus);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to change user status");
-                    try{
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         Log.e(TAG, e.getMessage());
                     }
                     return;
@@ -159,16 +147,45 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    public void changeName(String curName){
+    public String convertStatus(boolean isAwake) {
+        statusSwitch.setChecked(isAwake);
+        if (isAwake) {
+            return "awake";
+        } else {
+            return "sleep";
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
+    public void onUserInfoEditingDialogPositiveClick(String type, String value) {
+        switch (type) {
+            case "name":
+                changeName(value);
+                break;
+            case "phone":
+                changePhone(value);
+                break;
+            case "address":
+                changeAddress(value);
+                break;
+        }
+
+    }
+
+    public void changeName(String curName) {
         Call<User> call = userApiInterface.userUpdateName(token, curName);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to change user name");
-                    try{
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         Log.e(TAG, e.getMessage());
                     }
                     return;
@@ -184,16 +201,16 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    public void changePhone(String curPhone){
+    public void changePhone(String curPhone) {
         Call<User> call = userApiInterface.userUpdatePhone(token, curPhone);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to change user phone");
-                    try{
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         Log.e(TAG, e.getMessage());
                     }
                     return;
@@ -209,16 +226,16 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    public void changeAddress(String curAddress){
+    public void changeAddress(String curAddress) {
         Call<User> call = userApiInterface.userUpdateAddress(token, curAddress);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to change user address");
-                    try{
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch(IOException e){
+                    } catch (IOException e) {
                         Log.e(TAG, e.getMessage());
                     }
                     return;
@@ -232,21 +249,6 @@ public class SettingActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
             }
         });
-    }
-
-    public void onUserInfoEditingDialogPositiveClick(String type, String value){
-        switch(type){
-            case "name":
-                changeName(value);
-                break;
-            case "phone":
-                changePhone(value);
-                break;
-            case "address":
-                changeAddress(value);
-                break;
-        }
-
     }
 
 

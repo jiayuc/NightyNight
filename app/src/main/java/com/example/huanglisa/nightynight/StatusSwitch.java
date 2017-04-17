@@ -2,14 +2,12 @@ package com.example.huanglisa.nightynight;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 
 /**
  * Created by huanglisa on 11/16/16.
  */
-public class StatusSwitch extends Switch{
+public class StatusSwitch extends Switch {
 
     private boolean needUpdate = true;
 
@@ -29,21 +27,21 @@ public class StatusSwitch extends Switch{
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setChecked(boolean isChekced, boolean needUpdate){
+    public void setChecked(boolean isChekced, boolean needUpdate) {
         //System.out.format("non default setChecked %n");
         this.needUpdate = needUpdate;
         super.setChecked(isChekced);
     }
 
     @Override
-    public void setChecked(boolean isChekced){
+    public void setChecked(boolean isChekced) {
         //System.out.format("default setChecked %n");
         this.needUpdate = true;
         super.setChecked(isChekced);
 
     }
 
-    public boolean checkNeedUpdate(){
+    public boolean checkNeedUpdate() {
         return this.needUpdate;
     }
 

@@ -5,65 +5,67 @@
     android:id="@+id/activity_individual"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.huanglisa.nightynight.individualActivity"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    tools:context="com.example.huanglisa.nightynight.individualActivity">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile_background"
-        android:scaleY="1.3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="230dp"
+        android:scaleY="1.3"
+        android:src="@drawable/profile_background"
         android:translationY="-60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_marginTop="18dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/profile"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFFFF"/>
+            app:civ_border_color="#FFFFFFFF"
+            app:civ_border_width="3dp" />
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lisa Huang"
-            android:id="@+id/name"
-            android:textSize="24sp"
+            android:textColor="@color/colorWhite"
             android:textColorLink="@color/colorWhite"
-            android:textColor="@color/colorWhite" />
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="status:"
-                android:textSize="14sp"
-                android:textColorLink="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="5dp"/>
+                android:text="status:"
+                android:textColor="@color/colorWhite"
+                android:textColorLink="@color/colorWhite"
+                android:textSize="14sp" />
+
             <TextView
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="sleeping"
-                android:id="@+id/status"
-                android:textSize="14sp"
-                android:textColorLink="@color/colorWhite"
                 android:textColor="@color/colorWhite"
-                android:layout_marginTop="3dp" />
+                android:textColorLink="@color/colorWhite"
+                android:textSize="14sp" />
         </LinearLayout>
 
 
@@ -72,77 +74,85 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="10dp">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
                 android:id="@+id/follower_num"
-                android:textSize="14sp"
-                android:textColor="@color/colorPrimary"
-                android:paddingRight="10dp" />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="followers"
+                android:paddingRight="10dp"
+                android:text="20"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/follower"
-                android:textSize="14sp"
-                android:textColor="@color/colorWhite"
-                android:layout_marginRight="20dp" />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30"
-                android:id="@+id/following_num"
-                android:textSize="14sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="20dp"
+                android:text="followers"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
             <TextView
+                android:id="@+id/following_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="30"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/followings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="following"
-                android:id="@+id/followings"
-                android:textSize="14sp"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingRight="0dp"
         android:theme="@style/ToolbarTheme" />
+
     <LinearLayout
         android:layout_width="300dp"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
         android:layout_height="300dp"
-        android:paddingTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical"
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_building"
-                android:tint="#1f2c4e"
+                android:paddingLeft="20dp"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:paddingLeft="20dp" />
+                android:src="@drawable/ic_building"
+                android:tint="#1f2c4e" />
+
             <TextView
+                android:id="@+id/link_building"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="view the building"
-                android:id="@+id/link_building"
-                android:textSize="20sp"
-                android:textColor="#1f2c4e"
                 android:paddingLeft="40dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:text="view the building"
+                android:textColor="#1f2c4e"
+                android:textSize="20sp">
 
             </TextView>
         </LinearLayout>
@@ -155,27 +165,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_phone_call"
-                android:tint="#1f2c4e"
+                android:paddingLeft="20dp"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:paddingLeft="20dp" />
+                android:src="@drawable/ic_phone_call"
+                android:tint="#1f2c4e" />
+
             <TextView
+                android:id="@+id/link_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="make a call"
-                android:id="@+id/link_message"
-                android:textSize="20sp"
-                android:textColor="#1f2c4e"
                 android:paddingLeft="40dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:text="make a call"
+                android:textColor="#1f2c4e"
+                android:textSize="20sp">
 
             </TextView>
         </LinearLayout>
@@ -188,27 +200,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_sms_message"
-                android:tint="#1f2c4e"
+                android:paddingLeft="20dp"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:paddingLeft="20dp" />
+                android:src="@drawable/ic_sms_message"
+                android:tint="#1f2c4e" />
+
             <TextView
+                android:id="@+id/link_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="send message"
-                android:id="@+id/link_call"
-                android:textSize="20sp"
-                android:textColor="#1f2c4e"
                 android:paddingLeft="40dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:text="send message"
+                android:textColor="#1f2c4e"
+                android:textSize="20sp">
 
             </TextView>
 
@@ -221,27 +235,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_nightcap"
-                android:tint="#1f2c4e"
+                android:paddingLeft="20dp"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:paddingLeft="20dp" />
+                android:src="@drawable/ic_nightcap"
+                android:tint="#1f2c4e" />
+
             <TextView
+                android:id="@+id/link_sleep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="check sleeping status"
-                android:id="@+id/link_sleep"
-                android:textSize="20sp"
-                android:textColor="#1f2c4e"
                 android:paddingLeft="40dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:text="check sleeping status"
+                android:textColor="#1f2c4e"
+                android:textSize="20sp">
 
             </TextView>
 

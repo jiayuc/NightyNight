@@ -38,11 +38,11 @@ public class AlarmReceiver extends BroadcastReceiver {
      */
     public void onReceive(Context context, Intent intent) {
         status = intent.getExtras().getBoolean(KEY_STATUS);
-        Log.d(TAG, "onReceive: "+status + ", current time" + System.currentTimeMillis());
+        Log.d(TAG, "onReceive: " + status + ", current time" + System.currentTimeMillis());
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         session = new SessionManager(context.getApplicationContext());
         changeUserStatus(status);
-        if(status){//awake
+        if (status) {//awake
             Notification(context, "time to wake up", 0);
         } else {
             Notification(context, "time to sleep", 1);
@@ -50,6 +50,34 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     }
 
+    /**
+     * Change user status between sleep and awake
+     *
+     * @param status user sleeping status
+     */
+    public void changeUserStatus(boolean status) {
+        Call<User> call = userApiInterface.userUpdateStatus(session.getToken(), status);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "failed to change user status");
+                    try {
+                        Log.e(TAG, response.errorBody().string());
+                    } catch (IOException e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                    return;
+                }
+                Log.d(TAG, "get user new status: " + response.body().status);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
 
     /**
      * Create push notification when alarm goes off
@@ -97,36 +125,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationmanager.notify(0, builder.build());
 
     }
-
-    /**
-     * Change user status between sleep and awake
-     * @param status user sleeping status
-     */
-    public void changeUserStatus(boolean status){
-        Call<User> call = userApiInterface.userUpdateStatus(session.getToken(), status);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(!response.isSuccessful()){
-                    Log.e(TAG, "failed to change user status");
-                    try{
-                        Log.e(TAG, response.errorBody().string());
-                    } catch(IOException e){
-                        Log.e(TAG, e.getMessage());
-                    }
-                    return;
-                }
-                Log.d(TAG, "get user new status: " + response.body().status);
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
-    }
-
-
 
 
 }

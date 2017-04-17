@@ -8,28 +8,28 @@ public class FriendItem {
     private String id, name;
     private boolean status;
 
-    public FriendItem(){
+    public FriendItem() {
         this.name = "default name";
         this.status = true;
         this.id = null;
     }
 
-    public FriendItem(String id, String name, boolean status){
+    public FriendItem(String id, String name, boolean status) {
         this.id = id;
         this.name = name;
         this.status = status;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.status;
     }
 
-    public String getTextStatus(){
-        if(this.status){
+    public String getTextStatus() {
+        if (this.status) {
             return "awake";
         }
         return "sleep";

@@ -8,32 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 
-
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder> {
 
     private List<FriendItem> friendList;
-
-
-    public class FriendListViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, status;
-        public ImageView profile;
-
-        public FriendListViewHolder(View view) {
-            super(view);
-            name = (TextView) view.findViewById(R.id.friend_name);
-            status = (TextView) view.findViewById(R.id.friend_status);
-            profile = (ImageView) view.findViewById(R.id.friend_profile);
-
-
-        }
-    }
 
 
     public FriendListAdapter(List<FriendItem> friendList) {
@@ -59,9 +42,22 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Fr
 
     }
 
-
     @Override
     public int getItemCount() {
         return friendList.size();
+    }
+
+    public class FriendListViewHolder extends RecyclerView.ViewHolder {
+        public TextView name, status;
+        public ImageView profile;
+
+        public FriendListViewHolder(View view) {
+            super(view);
+            name = (TextView) view.findViewById(R.id.friend_name);
+            status = (TextView) view.findViewById(R.id.friend_status);
+            profile = (ImageView) view.findViewById(R.id.friend_profile);
+
+
+        }
     }
 }

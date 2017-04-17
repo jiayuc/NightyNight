@@ -13,7 +13,7 @@ public class User {
     public String password;
     public boolean status;
 
-    public User(String email, String password, String name, String address, String phone, boolean status){
+    public User(String email, String password, String name, String address, String phone, boolean status) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -23,7 +23,7 @@ public class User {
         this.status = status;
     }
 
-    public void setToken(String token){
+    public void setToken(String token) {
         this.token = token;
     }
 }

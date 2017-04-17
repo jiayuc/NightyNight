@@ -1,8 +1,8 @@
 package com.example.huanglisa.nightynight;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class individualActivity extends AppCompatActivity {
 
     private TextView name, status;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +32,17 @@ public class individualActivity extends AppCompatActivity {
         toolBar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return true;
-    }
-
-    public String convertStatus(boolean isAwake){
-        if(isAwake){
+    public String convertStatus(boolean isAwake) {
+        if (isAwake) {
             return "awake";
         } else {
             return "sleep";
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 
 

@@ -2,8 +2,8 @@ package com.example.huanglisa.nightynight;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,41 +11,35 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.huanglisa.nightynight.rest.ApiClient;
+import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.example.huanglisa.nightynight.rest.ApiClient;
-import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
-
 
 /**
  * Created by huanglisa on 11/1/16.
  */
 
-public class BuildingFragment extends Fragment{
+public class BuildingFragment extends Fragment {
     public static final int DIALOG_FRAGMENT = 1;
     public static final String TAG = "BuildingFragment";
+    SessionManager session;
+    List<ReceivedBuilding> buildingList;
     //buildings in the page
     private int[] buildings = {
             R.id.building1,
             R.id.building2
     };
-
     private int[] images = {
             R.drawable.building1,
             R.drawable.building2
     };
-
-
     private View view;
-
-    SessionManager session;
-    List<ReceivedBuilding> buildingList;
     private BuildingApiInterface buildingApiInterface;
     //clicked building
     private int clickedIndex = -1;
@@ -57,17 +51,17 @@ public class BuildingFragment extends Fragment{
         public void onClick(View v) {
             buildingList = session.getBuildingList();
             ImageView imgV = (ImageView) v;
-            if(imgV != null) {
+            if (imgV != null) {
                 clickedId = imgV.getId();
-                if(clickedId == R.id.building1)
+                if (clickedId == R.id.building1)
                     clickedIndex = 0;
-                if(clickedId == R.id.building2)
+                if (clickedId == R.id.building2)
                     clickedIndex = 1;
                 imgV.setImageLevel(2);
             }
 
             //switch building outlook when click
-            if(view != null) {
+            if (view != null) {
                 for (int i = 0; i < images.length; i++) {
                     if (i != clickedIndex) {
                         ImageView curView = (ImageView) (view.findViewById(buildings[i]));
@@ -79,9 +73,7 @@ public class BuildingFragment extends Fragment{
             }
 
 
-
-
-            if(checkBuildingExist(clickedIndex)) {
+            if (checkBuildingExist(clickedIndex)) {
                 Toast.makeText(getContext(), buildingList.get(clickedIndex).name, Toast.LENGTH_LONG).show();
                 toDetailBuildingView(Integer.toString(clickedId), buildingList.get(clickedIndex));
             } else {
@@ -93,14 +85,15 @@ public class BuildingFragment extends Fragment{
         }
     };
 
-    public boolean checkBuildingExist(int index){
-        for(ReceivedBuilding rb : buildingList){
-            if(rb.index == index){
+    public boolean checkBuildingExist(int index) {
+        for (ReceivedBuilding rb : buildingList) {
+            if (rb.index == index) {
                 return true;
             }
         }
         return false;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_building, container, false);
@@ -108,15 +101,16 @@ public class BuildingFragment extends Fragment{
         buildingList = session.getBuildingList();
         buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);
         //set click event listener when the view is gnerated
-        for(int building : buildings){
+        for (int building : buildings) {
             ImageView imageView = (ImageView) view.findViewById(building);
             imageView.setOnClickListener(clickListener);
         }
         return view;
     }
 
-    /** Called when the user clicks the Send button
-        Move to detail page
+    /**
+     * Called when the user clicks the Send button
+     * Move to detail page
      **/
     private void toDetailBuildingView(String buildingId, ReceivedBuilding rb) {
         Intent intent = new Intent(getActivity(), DetailBuildingActivity.class);
@@ -134,16 +128,16 @@ public class BuildingFragment extends Fragment{
         dialog.show(getActivity().getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
-    public void onBuildingGenerationDialogPositiveClick(String name){
+    public void onBuildingGenerationDialogPositiveClick(String name) {
         //search server
         Call<ReceivedBuilding> call = buildingApiInterface.addBuilding(session.getToken(), name, clickedIndex);
         call.enqueue(new Callback<ReceivedBuilding>() {
             @Override
             public void onResponse(Call<ReceivedBuilding> call, Response<ReceivedBuilding> response) {
-                if(!response.isSuccessful()){
-                    try{
+                if (!response.isSuccessful()) {
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         Log.e(TAG, "failed to get building info");
                     } finally {
                         return;
@@ -151,7 +145,7 @@ public class BuildingFragment extends Fragment{
                 }
                 String name = response.body().name;
                 String id = response.body().id;
-                int index= response.body().index;
+                int index = response.body().index;
                 ReceivedBuilding rb = new ReceivedBuilding(id, name, index, session.getToken());
                 buildingList.add(rb);
                 session.updateBuilding(rb);

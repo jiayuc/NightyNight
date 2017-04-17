@@ -41,7 +41,7 @@ public class SessionManager {
     private UserApiInterface userApiInterface;
     private BuildingApiInterface buildingApiInterface;
 
-    public SessionManager(Context context){
+    public SessionManager(Context context) {
         this._context = context;
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
@@ -49,25 +49,13 @@ public class SessionManager {
         buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);
     }
 
-    public String getToken(){
+    public String getToken() {
         return pref.getString(KEY_TOKEN, "");
     }
 
-    //create loginNative session
-    public void createLoginSession(String name, String email, String token, String password){
-        editor.putBoolean(IS_LOGIN, true);
-        editor.putString(KEY_NAME, name);
-        editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_TOKEN, token);
-        editor.putString(KEY_PASSWORD, password);
-        //commit change
-        editor.commit();
-    }
-
-
     //create new loginNative page if not log in
-    public void checkLogin(){
-        if(!this.isLoggedIn()){
+    public void checkLogin() {
+        if (!this.isLoggedIn()) {
             Intent intent = new Intent(_context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -77,13 +65,13 @@ public class SessionManager {
             //update token and get buildingList
             String input_email = pref.getString(KEY_EMAIL, null);
             String input_password = pref.getString(KEY_PASSWORD, null);
-            Log.d(TAG, "start request token and buildingList， email:"+ input_email + " password:"+input_password);
+            Log.d(TAG, "start request token and buildingList， email:" + input_email + " password:" + input_password);
             Call<User> call = userApiInterface.userLogIn(input_email, input_password);
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if(!response.isSuccessful()){
-                        try{
+                    if (!response.isSuccessful()) {
+                        try {
                             Log.e(TAG, response.errorBody().string());
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
@@ -92,15 +80,15 @@ public class SessionManager {
                         }
                     }
 
-                    Call<List<ReceivedBuilding>> buildingCall  = buildingApiInterface.getBuildings(response.body().token);
+                    Call<List<ReceivedBuilding>> buildingCall = buildingApiInterface.getBuildings(response.body().token);
                     buildingCall.enqueue(new Callback<List<ReceivedBuilding>>() {
                         @Override
                         public void onResponse(Call<List<ReceivedBuilding>> call, Response<List<ReceivedBuilding>> response) {
-                            if(!response.isSuccessful()){
+                            if (!response.isSuccessful()) {
                                 Log.e(TAG, "failed to get building list");
-                                try{
+                                try {
                                     Log.e(TAG, response.errorBody().string());
-                                }catch(IOException e){
+                                } catch (IOException e) {
                                     Log.e(TAG, e.getMessage());
                                 }
                                 return;
@@ -128,9 +116,49 @@ public class SessionManager {
     }
 
     /**
+     * Quick check for loginNative
+     **/
+    // Get Login State
+    public boolean isLoggedIn() {
+        System.out.format("check log in:%b%n", pref.getBoolean(IS_LOGIN, false));
+        return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public void addBuildingList(List<ReceivedBuilding> list) {
+        //Set<String> buildingList = new HashSet<>();
+        String buildingList = "";
+
+        for (ReceivedBuilding building : list) {
+            //buildingList.add(building.id);
+            if (buildingList == "") {
+                buildingList = buildingList + building.id + "," + building.name + "," + building.index;
+            } else {
+                buildingList = buildingList + "|" + building.id + "," + building.name + "," + building.index;
+            }
+        }
+
+        editor.putString(KEY_BUILDINGS, buildingList);
+        System.out.format("list length: %d%n", list.size());
+        System.out.format("just created buildingList %s%n", buildingList);
+        editor.commit();
+
+    }
+
+    //create loginNative session
+    public void createLoginSession(String name, String email, String token, String password) {
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_TOKEN, token);
+        editor.putString(KEY_PASSWORD, password);
+        //commit change
+        editor.commit();
+    }
+
+    /**
      * Clear session details
-     * */
-    public void logoutUser(){
+     */
+    public void logoutUser() {
         // Clearing all data from Shared Preferences
         System.out.format("log out!!%n");
         editor.clear();
@@ -149,36 +177,7 @@ public class SessionManager {
         _context.startActivity(i);
     }
 
-    /**
-     * Quick check for loginNative
-     * **/
-    // Get Login State
-    public boolean isLoggedIn(){
-        System.out.format("check log in:%b%n", pref.getBoolean(IS_LOGIN, false));
-        return pref.getBoolean(IS_LOGIN, false);
-    }
-
-    public void addBuildingList(List<ReceivedBuilding> list){
-        //Set<String> buildingList = new HashSet<>();
-        String buildingList = "";
-
-        for(ReceivedBuilding building : list){
-            //buildingList.add(building.id);
-            if(buildingList == ""){
-                buildingList = buildingList + building.id+","+building.name+","+building.index;
-            } else {
-                buildingList = buildingList + "|" + building.id + "," + building.name+","+building.index;
-            }
-        }
-
-        editor.putString(KEY_BUILDINGS, buildingList);
-        System.out.format("list length: %d%n", list.size());
-        System.out.format("just created buildingList %s%n", buildingList);
-        editor.commit();
-
-    }
-
-    public void updateBuilding(ReceivedBuilding rb){
+    public void updateBuilding(ReceivedBuilding rb) {
         String buildingString = pref.getString(KEY_BUILDINGS, null);
         buildingString = buildingString.concat("|" + rb.id + "," + rb.name + "," + rb.index);
         System.out.format("updated buildingString %s%n", buildingString);
@@ -186,20 +185,20 @@ public class SessionManager {
         editor.commit();
     }
 
-    public List<ReceivedBuilding> getBuildingList(){
+    public List<ReceivedBuilding> getBuildingList() {
         List<ReceivedBuilding> idList = new ArrayList<>();
         String buildingString = pref.getString(KEY_BUILDINGS, null);
-        if(buildingString == null){
+        if (buildingString == null) {
             return idList;
         }
         String[] list = buildingString.split("\\|");
-        for(String pair : list){
+        for (String pair : list) {
             String[] pairString = pair.split(",");
-            if(pairString.length != 3){
+            if (pairString.length != 3) {
                 continue;
             }
             String id = pairString[0];
-            String name =pairString[1];
+            String name = pairString[1];
             int index = Integer.parseInt(pairString[2]);
             ReceivedBuilding rb = new ReceivedBuilding(id, name, index, pref.getString(KEY_TOKEN, null));
             idList.add(rb);
@@ -207,7 +206,6 @@ public class SessionManager {
         return idList;
 
     }
-
 
 
 }

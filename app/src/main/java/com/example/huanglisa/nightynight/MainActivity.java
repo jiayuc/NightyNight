@@ -1,12 +1,7 @@
 package com.example.huanglisa.nightynight;
 
-import com.microsoft.windowsazure.mobileservices.*;
-import com.microsoft.windowsazure.mobileservices.table.*;
-import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,15 +9,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+
 import java.net.MalformedURLException;
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private MobileServiceClient mClient;
     SessionManager session;
     Toolbar toolbar;
+    private MobileServiceClient mClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //connent to server
@@ -48,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
-
         //pager
         final CustomViewPager viewPager = (CustomViewPager) findViewById(R.id.pager);
         PagerAdapter pageAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
@@ -57,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(0);
         viewPager.setPagingEnabled(false);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -117,13 +117,6 @@ public class MainActivity extends AppCompatActivity {
         // in order to receive the result inside onActivityResult from the fragment.
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-
 
 
 }

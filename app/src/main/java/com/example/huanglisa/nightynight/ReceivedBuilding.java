@@ -10,10 +10,10 @@ public class ReceivedBuilding {
     public String userId;
     public int index;
 
-    public ReceivedBuilding(String id, String name, int index, String userId){
+    public ReceivedBuilding(String id, String name, int index, String userId) {
         this.id = id;
         this.name = name;
-        this.index= index;
+        this.index = index;
         this.userId = userId;
     }
 }

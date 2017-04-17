@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/friend_profile"
-            android:layout_height="wrap_content"
-            android:src="@drawable/user"
             android:layout_width="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="50dp"
-        />
+            android:layout_marginTop="20dp"
+            android:src="@drawable/user" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/friend_name"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Grayce"
+                android:layout_centerVertical="true"
                 android:gravity="center"
-                android:textColor="@color/colorBlack">
-            </TextView>
+                android:text="Grayce"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"></TextView>
+
             <TextView
                 android:id="@+id/friend_email"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:textSize="14sp"
+                android:layout_height="wrap_content"
                 android:text="graycehuang@gmail.com"
-                >
-            </TextView>
+                android:textSize="14sp"></TextView>
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

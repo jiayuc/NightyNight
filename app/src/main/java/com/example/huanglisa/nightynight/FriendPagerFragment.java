@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,28 +28,29 @@ public class FriendPagerFragment extends Fragment {
     private SessionManager session;
     private int size;
     private BuildingApiInterface buildingApiInterface;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        View view=inflater.inflate(R.layout.pager_friend, container, false);
-        ViewPager pager=(ViewPager)view.findViewById(R.id.friend_pager);
+        View view = inflater.inflate(R.layout.pager_friend, container, false);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.friend_pager);
         pager.setAdapter(buildAdapter());
 
         session = new SessionManager(getContext().getApplicationContext());
         size = session.getBuildingList().size();
-        buildingApiInterface =  ApiClient.getClient().create(BuildingApiInterface.class);
-        if(size == 0){
+        buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);
+        if (size == 0) {
             showBuildingGenerationDialog();
         }
 
-        return(view);
+        return (view);
     }
 
     private PagerAdapter buildAdapter() {
-        return(new FriendViewAdapter(getActivity(), getChildFragmentManager()));
+        return (new FriendViewAdapter(getActivity(), getChildFragmentManager()));
     }
 
     public void showBuildingGenerationDialog() {
@@ -60,17 +60,17 @@ public class FriendPagerFragment extends Fragment {
         dialog.show(getActivity().getSupportFragmentManager(), "NoticeDialogFragment");
     }
 
-    public void onBuildingGenerationDialogPositiveClick(String name){
+    public void onBuildingGenerationDialogPositiveClick(String name) {
         //search server
         Call<ReceivedBuilding> call = buildingApiInterface.addBuilding(session.getToken(), name, 0);
         call.enqueue(new Callback<ReceivedBuilding>() {
             @Override
             public void onResponse(Call<ReceivedBuilding> call, Response<ReceivedBuilding> response) {
                 System.out.format("add new building%n");
-                if(!response.isSuccessful()){
-                    try{
+                if (!response.isSuccessful()) {
+                    try {
                         Log.e(TAG, response.errorBody().string());
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         Log.e(TAG, "failed to get friend info");
                     } finally {
                         return;
@@ -78,7 +78,7 @@ public class FriendPagerFragment extends Fragment {
                 }
                 String name = response.body().name;
                 String id = response.body().id;
-                int index= response.body().index;
+                int index = response.body().index;
                 ReceivedBuilding rb = new ReceivedBuilding(id, name, index, session.getToken());
                 session.updateBuilding(rb);
                 reloadFragment();
@@ -93,7 +93,7 @@ public class FriendPagerFragment extends Fragment {
 
     }
 
-    public void reloadFragment(){
+    public void reloadFragment() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }

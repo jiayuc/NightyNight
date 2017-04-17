@@ -1,12 +1,14 @@
 package com.example.huanglisa.nightynight;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
 /**
  * Created by huanglisa on 11/1/16.
  */
 
-public class PagerAdapter extends FragmentStatePagerAdapter{
+public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
@@ -16,6 +18,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter{
 
     /**
      * method for switch fragment for the pager
+     *
      * @param position
      * @return
      */

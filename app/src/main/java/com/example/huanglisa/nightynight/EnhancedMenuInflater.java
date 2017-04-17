@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
-
 public class EnhancedMenuInflater {
 
     public static void inflate(MenuInflater inflater, Menu menu, boolean forceVisible) {

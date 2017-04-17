@@ -1,63 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:clickable="true"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/sleepTime"
-        android:layout_height="match_parent"
-        android:textSize="36sp"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="31dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
+        android:gravity="center"
         android:text="21:11"
-        android:gravity="center">
+        android:textSize="36sp">
 
     </TextView>
 
     <com.example.huanglisa.nightynight.StatusSwitch
         android:id="@+id/onOff"
-        android:layout_height="30dp"
         android:layout_width="50dp"
-        android:layout_marginLeft="300dp"
-        android:scrollbarSize="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
         android:layout_alignTop="@+id/wakeTime"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="300dp"
         android:layout_marginTop="10dp"
+        android:scrollbarSize="30dp"
         android:theme="@style/SCBSwitch" />
 
     <TextView
         android:id="@+id/wakeTime"
-        android:layout_height="40dp"
-        android:layout_marginLeft="150dp"
         android:layout_width="wrap_content"
-        android:textSize="36sp"
+        android:layout_height="40dp"
         android:layout_alignBaseline="@+id/sleepTime"
         android:layout_alignBottom="@+id/sleepTime"
-        android:layout_toStartOf="@+id/onOff"
         android:layout_marginEnd="15dp"
-        android:text="05:10">
-    </TextView>
+        android:layout_marginLeft="150dp"
+        android:layout_toStartOf="@+id/onOff"
+        android:text="05:10"
+        android:textSize="36sp"></TextView>
 
     <ImageView
-        android:layout_height="wrap_content"
-        android:src="@drawable/right_arrow"
         android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/onOff"
+        android:layout_alignTop="@+id/wakeTime"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@+id/wakeTime"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:layout_alignTop="@+id/wakeTime"
-        android:layout_toStartOf="@+id/wakeTime"
-        android:layout_alignBottom="@+id/onOff"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp" />
-
-
+        android:src="@drawable/right_arrow" />
 
 
 </RelativeLayout>

@@ -2,17 +2,16 @@ package com.example.huanglisa.nightynight;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.rest.ApiClient;
-import com.example.huanglisa.nightynight.rest.FriendApiInterface;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
 
 import retrofit2.Call;
@@ -28,8 +27,8 @@ public class FriendEmailSearchFragment extends DialogFragment {
 
     // Use this instance of the interface to deliver action events
     FriendFragment mListener;
-    private UserApiInterface userApiInterface;
     SessionManager session;
+    private UserApiInterface userApiInterface;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class FriendEmailSearchFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        mListener = (FriendFragment)getTargetFragment();
+        mListener = (FriendFragment) getTargetFragment();
 
         //initialize api
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
@@ -60,11 +59,11 @@ public class FriendEmailSearchFragment extends DialogFragment {
                         call.enqueue(new Callback<ReceivedFriend>() {
                             @Override
                             public void onResponse(Call<ReceivedFriend> call, Response<ReceivedFriend> response) {
-                                if(!response.isSuccessful()){
-                                    try{
+                                if (!response.isSuccessful()) {
+                                    try {
                                         Log.e(TAG, response.errorBody().string());
                                         Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_LONG).show();
-                                    } catch (Exception e){
+                                    } catch (Exception e) {
                                         Toast.makeText(getActivity(), "failed to get user info", Toast.LENGTH_LONG).show();
                                     } finally {
                                         return;

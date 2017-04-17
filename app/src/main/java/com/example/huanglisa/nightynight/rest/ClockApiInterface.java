@@ -20,7 +20,7 @@ import retrofit2.http.Path;
 public interface ClockApiInterface {
     @FormUrlEncoded
     @POST("clock")
-    Call <ReceivedClock> addClock(@Header("x-zumo-auth") String authorization, @Field("sleepHour") int sleepHour, @Field("sleepMin") int sleepMin, @Field("wakeHour") int wakeHour, @Field("wakeMin") int wakeMin);
+    Call<ReceivedClock> addClock(@Header("x-zumo-auth") String authorization, @Field("sleepHour") int sleepHour, @Field("sleepMin") int sleepMin, @Field("wakeHour") int wakeHour, @Field("wakeMin") int wakeMin);
 
     @GET("clock")
     Call<List<ReceivedClock>> getUserClocks(@Header("x-zumo-auth") String authorization);

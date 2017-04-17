@@ -2,19 +2,14 @@ package com.example.huanglisa.nightynight;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.huanglisa.nightynight.rest.ApiClient;
-import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 
 
 /**
@@ -52,7 +47,6 @@ public class BuildingGenerationDialog extends DialogFragment {
         mListener = getTargetFragment();
 
 
-
         //session
         session = new SessionManager(getContext().getApplicationContext());
 
@@ -66,13 +60,13 @@ public class BuildingGenerationDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int int_id) {
                         String name = nameInput.getText().toString();
-                        if(name.length() == 0){
+                        if (name.length() == 0) {
                             Toast.makeText(getContext(), "please type in valid name", Toast.LENGTH_LONG).show();
                         }
-                        if(listenerType == KEY_BUILDING){
-                            ((BuildingFragment)mListener).onBuildingGenerationDialogPositiveClick(name);
-                        } else if(listenerType == KEY_FRIEND){
-                            ((FriendPagerFragment)mListener).onBuildingGenerationDialogPositiveClick(name);
+                        if (listenerType == KEY_BUILDING) {
+                            ((BuildingFragment) mListener).onBuildingGenerationDialogPositiveClick(name);
+                        } else if (listenerType == KEY_FRIEND) {
+                            ((FriendPagerFragment) mListener).onBuildingGenerationDialogPositiveClick(name);
                         }
 
                     }

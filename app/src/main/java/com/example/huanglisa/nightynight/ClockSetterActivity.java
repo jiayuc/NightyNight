@@ -1,14 +1,14 @@
 package com.example.huanglisa.nightynight;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 public class ClockSetterActivity extends AppCompatActivity {
     public CustomViewPager viewPager;
     protected ClockItem clockItem = new ClockItem();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,16 +33,16 @@ public class ClockSetterActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int index = viewPager.getCurrentItem();
-        if(index == 0){
+        if (index == 0) {
             System.out.format("return from sleep");
             finish();
-        }else{
+        } else {
             viewPager.setCurrentItem(0);
         }
         return true;
     }
 
-    public ClockItem getClockItem(){
+    public ClockItem getClockItem() {
         return this.clockItem;
     }
 

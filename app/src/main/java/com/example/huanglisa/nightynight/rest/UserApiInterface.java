@@ -22,7 +22,7 @@ public interface UserApiInterface {
     // native password login
     @FormUrlEncoded
     @POST("user")
-    Call <User> userLogIn(@Field("email") String email, @Field("password") String password);
+    Call<User> userLogIn(@Field("email") String email, @Field("password") String password);
 
     // Facebook login API
     @FormUrlEncoded
@@ -35,36 +35,36 @@ public interface UserApiInterface {
     Call<User> userLogInViaGoogle(@Field("token") String token, @Field("email") String email, @Field("name") String name);
 
     @PUT("user")
-    Call <User> userSignUp(@Body User user);
+    Call<User> userSignUp(@Body User user);
 
     @GET("user")
-    Call <User> getUserInfo(@Header("x-zumo-auth") String authorization);
+    Call<User> getUserInfo(@Header("x-zumo-auth") String authorization);
 
     @GET("user/clock")
-    Call <ReceivedClock> userGetActiveClock(@Header("x-zumo-auth") String authorization);
+    Call<ReceivedClock> userGetActiveClock(@Header("x-zumo-auth") String authorization);
 
     @FormUrlEncoded
     @POST("user/friend")
-    Call <ReceivedFriend> userGetFriend(@Header("x-zumo-auth") String authorization, @Field("friendId") String friendId);
+    Call<ReceivedFriend> userGetFriend(@Header("x-zumo-auth") String authorization, @Field("friendId") String friendId);
 
     @FormUrlEncoded
     @PUT("user/clock")
-    Call <ReceivedClock> userUpdateActiveClock(@Header("x-zumo-auth") String authorization, @Field("clock") String id);
+    Call<ReceivedClock> userUpdateActiveClock(@Header("x-zumo-auth") String authorization, @Field("clock") String id);
 
     @FormUrlEncoded
     @PUT("user/status")
-    Call <User> userUpdateStatus(@Header("x-zumo-auth") String authorization, @Field("status") boolean status);
+    Call<User> userUpdateStatus(@Header("x-zumo-auth") String authorization, @Field("status") boolean status);
 
     @FormUrlEncoded
     @PUT("user/address")
-    Call <User> userUpdateAddress(@Header("x-zumo-auth") String authorization, @Field("address") String address);
+    Call<User> userUpdateAddress(@Header("x-zumo-auth") String authorization, @Field("address") String address);
 
     @FormUrlEncoded
     @PUT("user/phone")
-    Call <User> userUpdatePhone(@Header("x-zumo-auth") String authorization, @Field("phone") String phone);
+    Call<User> userUpdatePhone(@Header("x-zumo-auth") String authorization, @Field("phone") String phone);
 
     @FormUrlEncoded
     @PUT("user/name")
-    Call <User> userUpdateName(@Header("x-zumo-auth") String authorization, @Field("name") String name);
+    Call<User> userUpdateName(@Header("x-zumo-auth") String authorization, @Field("name") String name);
 
 }

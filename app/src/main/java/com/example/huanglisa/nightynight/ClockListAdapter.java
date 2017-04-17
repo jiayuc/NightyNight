@@ -81,5 +81,4 @@ public class ClockListAdapter extends RecyclerView.Adapter<ClockListAdapter.Cloc
     }
 
 
-
 }

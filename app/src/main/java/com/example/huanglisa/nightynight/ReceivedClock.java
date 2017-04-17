@@ -11,7 +11,7 @@ public class ReceivedClock {
     public int wakeMin;
     public String id;
 
-    public ReceivedClock(int sleepHour, int sleepMin, int wakeHour, int wakeMin, String id){
+    public ReceivedClock(int sleepHour, int sleepMin, int wakeHour, int wakeMin, String id) {
         this.sleepHour = sleepHour;
         this.sleepMin = sleepMin;
         this.wakeHour = wakeHour;

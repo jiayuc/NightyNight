@@ -35,14 +35,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Login activity, extends the fragmentActivity
+ */
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+    // constants
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final String GOOGLE_CLIENT_ID = "803304289559-atpfnn6je36a6qv1q60boe1qds492j8m.apps.googleusercontent.com";
     private static final int RC_SIGN_IN = 1;
     SessionManager session;
     CallbackManager callbackManager;
-    //ui component
+
+    // ui component vars
     private EditText _emailText;
     private EditText _passwordText;
     private Button _loginButton;
@@ -51,9 +56,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private BuildingApiInterface buildingApiInterface;
     private GoogleApiClient mGoogleApiClient;
 
+    /**
+     * Called when activity is created
+     *
+     * @param savedInstanceState - bundle containing  saved instance stats
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         //set theme, transition from splash page
         super.onCreate(savedInstanceState);
         // facebook login
@@ -71,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_login);
 
-        //API
+        // API
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);
 
@@ -139,26 +148,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     } // end of onCreate
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                googleSignIn();
-                break;
-        }
-    }
-
-    private void googleSignIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
     public void onConnectionFailed(ConnectionResult result) {
         System.out.print("onConnectionFailed: " + result.toString());
     }
 
-
-    //log in when user text input
+    /**
+     * Called after user sign up succeeds, login user with native login method
+     */
     public void loginNative() {
         Log.d(TAG, "loginNative: user typed password");
         _loginButton.setEnabled(false);
@@ -170,9 +166,99 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         onUserAPIResult(call);
     }
 
+    /**
+     * Handler when activity result is returned
+     *
+     * @param requestCode - code that represents action requested
+     * @param resultCode  - code that represents result
+     * @param data        - Intent that contains activity data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //catch user info when sign up
+        if (requestCode == REQUEST_SIGNUP) {
+            if (resultCode == RESULT_OK) {
+                loginNative(data.getExtras().getString("email"), data.getExtras().getString("password"), data.getExtras().getString("token"), data.getExtras().getString("password"));
+            }
+            if (resultCode == RESULT_CANCELED) {
+                System.out.format("get here");
+            }
+
+        } else if (requestCode == RC_SIGN_IN) {
+            Log.d(TAG, data.toString());
+            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleGoogleSignInResult(result);
+        }
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * Called when activity view is clicked
+     *
+     * @param v view that's clicked
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                googleSignIn();
+                break;
+        }
+    }
+
+    /**
+     * Called when user input password to login
+     *
+     * @param signupEmail user email used to sign in
+     * @param signupName
+     * @param token
+     * @param password
+     */
+    public void loginNative(String signupEmail, String signupName, String token, String password) {
+        Log.d(TAG, "Login");
+
+        _loginButton.setEnabled(false);
+
+        //find existed account with signupEmail and password
+        onLoginSucess(signupEmail, signupName, token, password);
+
+    }
+
+    private void handleGoogleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleGoogleSignInResult:" + result.isSuccess() + result.getStatus());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            Log.d(TAG, "Google front-end login success, get info: " + acct.getDisplayName() + acct.getId());
+            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getEmail(), acct.getDisplayName());
+            onUserAPIResult(call);
+        } else {
+            Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());
+            onLoginFail("google login failed: " + result.getStatus().getStatusMessage());
+        }
+    }
+
+    //store user info
+    public void onLoginSucess(String name, String email, String token, String password) {
+        System.out.print("Rest API successfully return login token: " + token);
+        _loginButton.setEnabled(true);
+        //!email and name will be actually returned from server
+
+        session.createLoginSession(name, email, token, password);
+
+        setResult(RESULT_OK, null);
+        finish();
+    }
+
+    private void googleSignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
     private void onUserAPIResult(Call<User> call) {
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<User > () {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "onResponse");
@@ -190,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
                 System.out.format("token: %s%n", response.body().token);
                 Call<List<ReceivedBuilding>> buildingCall = buildingApiInterface.getBuildings(response.body().token);
-                buildingCall.enqueue(new Callback<List<ReceivedBuilding>>() {
+                buildingCall.enqueue(new Callback<List<ReceivedBuilding>> () {
                     @Override
                     public void onResponse(Call<List<ReceivedBuilding>> call, Response<List<ReceivedBuilding>> response) {
                         if (!response.isSuccessful()) {
@@ -224,30 +310,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-    //used when email and password input
-    //e.g. run after sign up
-    public void loginNative(String signupEmail, String signupName, String token, String password) {
-        Log.d(TAG, "Login");
-
-        _loginButton.setEnabled(false);
-
-        //find existed account with signupEmail and password
-        onLoginSucess(signupEmail, signupName, token, password);
-
-    }
-
-    //store user info
-    public void onLoginSucess(String name, String email, String token, String password) {
-        System.out.print("Rest API successfully return login token: " + token);
-        _loginButton.setEnabled(true);
-        //!email and name will be actually returned from server
-
-        session.createLoginSession(name, email, token, password);
-
-        setResult(RESULT_OK, null);
-        finish();
-    }
-
     //indicate user log in failed
     public void onLoginFail(String message) {
         Log.i(TAG, "onLoginFail: " + message);
@@ -259,52 +321,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         _loginButton.setEnabled(true);
     }
 
-    /**
-     * Handler when activity result is returned
-     *
-     * @param requestCode - code that represents action requested
-     * @param resultCode  - code that represents result
-     * @param data        - Intent that contains activity data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //catch user info when sign up
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-                loginNative(data.getExtras().getString("email"), data.getExtras().getString("password"), data.getExtras().getString("token"), data.getExtras().getString("password"));
-            }
-            if (resultCode == RESULT_CANCELED) {
-                System.out.format("get here");
-            }
-
-        } else if (requestCode == RC_SIGN_IN) {
-            Log.d(TAG, data.toString());
-            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleGoogleSignInResult(result);
-        }
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void handleGoogleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleGoogleSignInResult:" + result.isSuccess() + result.getStatus());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            Log.d(TAG, "Google front-end login success, get info: " + acct.getDisplayName() + acct.getId());
-            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getEmail(), acct.getDisplayName());
-            onUserAPIResult(call);
-        } else {
-            Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());
-            onLoginFail("google login failed: " + result.getStatus().getStatusMessage());
-        }
-    }
-
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
         moveTaskToBack(true);
     }
+
 
 }
