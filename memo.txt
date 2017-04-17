@@ -1,25 +1,14 @@
-                // call facebook graphAPI to get email
-                GraphRequest request = GraphRequest.newMeRequest(
-                        accessToken,
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(
-                                    JSONObject object,
-                                    GraphResponse response) {
-                                // Application code
-                                Log.d(TAG, "Graph api request done: result is ");
-                                Log.d(TAG, response.getRawResponse().toString());
-                                String emailFB;
-                                try {
-                                    emailFB = object.getString("email");
+- keystore location
+    C:\Users\jiayu\.android\debug.keystore
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,link, email");
-                request.setParameters(parameters);
-                request.executeAsync();
-            }
+- keytool.exe
+    "C:\Program Files\Java\jre1.8.0_73\bin\keytool.exe"
+
+- openssl
+    C:\Program Files\Git\mingw64\bin\openssl
+
+- To get the debug certificate fingerprint
+    "C:\Program Files\Java\jre1.8.0_73\bin\keytool.exe" -exportcert -alias androiddebugkey -keystore C:\Users\jiayu\.android\debug.keystore -list -v
+
+- google client ID
+    803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com

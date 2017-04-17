@@ -20,8 +20,9 @@ public class ApiClient {
     private static OkHttpClient getRequestHeader() {
         OkHttpClient client = new OkHttpClient();
         OkHttpClient clientWith30sTimeout = client.newBuilder()
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(40, TimeUnit.SECONDS)
+                .writeTimeout(40, TimeUnit.SECONDS)
+                .connectTimeout(40, TimeUnit.SECONDS)
                 .build();
         return clientWith30sTimeout;
     }

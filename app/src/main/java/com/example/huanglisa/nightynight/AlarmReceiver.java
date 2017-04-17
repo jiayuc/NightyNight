@@ -3,25 +3,16 @@ package com.example.huanglisa.nightynight;
 /**
  * Created by huanglisa on 11/16/16.
  */
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
@@ -35,16 +26,17 @@ import retrofit2.Response;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+    private static final String KEY_STATUS = "status";
     private final String TAG = "AlarmReceiver";
     private UserApiInterface userApiInterface;
     private SessionManager session;
-    private static final String KEY_STATUS= "status";
     private boolean status;
 
     @Override
+    /**
+     * Called when alarm to sleep or wake up is received
+     */
     public void onReceive(Context context, Intent intent) {
-
-
         status = intent.getExtras().getBoolean(KEY_STATUS);
         Log.d(TAG, "onReceive: "+status + ", current time" + System.currentTimeMillis());
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
@@ -59,6 +51,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
 
+    /**
+     * Create push notification when alarm goes off
+     *
+     * @param context
+     * @param message
+     * @param signal
+     */
     public void Notification(Context context, String message, int signal) {
         // Set Notification Title
         String strtitle = "Reminder";
@@ -91,11 +90,18 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create Notification Manager
         NotificationManager notificationmanager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
+        // Set ringtone
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        builder.setSound(alarmSound);
         // Build Notification with Notification Manager
         notificationmanager.notify(0, builder.build());
 
     }
 
+    /**
+     * Change user status between sleep and awake
+     * @param status user sleeping status
+     */
     public void changeUserStatus(boolean status){
         Call<User> call = userApiInterface.userUpdateStatus(session.getToken(), status);
         call.enqueue(new Callback<User>() {

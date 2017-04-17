@@ -19,16 +19,20 @@ import retrofit2.http.PUT;
 
 
 public interface UserApiInterface {
-
+    // native password login
     @FormUrlEncoded
     @POST("user")
-        //TODO: change naming later to /...
     Call <User> userLogIn(@Field("email") String email, @Field("password") String password);
 
-    // Facebook loginNative API
+    // Facebook login API
     @FormUrlEncoded
     @POST("user/fb-access")
     Call<User> userLogInViaFacebook(@Field("id") String userId, @Field("token") String accessToken);
+
+    // google login API
+    @FormUrlEncoded
+    @POST("user/gg-access")
+    Call<User> userLogInViaGoogle(@Field("token") String token, @Field("email") String email);
 
     @PUT("user")
     Call <User> userSignUp(@Body User user);

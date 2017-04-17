@@ -1,35 +1,34 @@
 package com.example.huanglisa.nightynight;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import com.example.huanglisa.nightynight.rest.ApiClient;
-import com.example.huanglisa.nightynight.rest.UserApiInterface;
 import com.example.huanglisa.nightynight.rest.ClockApiInterface;
+import com.example.huanglisa.nightynight.rest.UserApiInterface;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.util.Calendar;
-
-import android.app.AlarmManager;
 
 /**
  * Created by huanglisa on 11/1/16.
@@ -37,11 +36,11 @@ import android.app.AlarmManager;
 
 public class ClockFragment extends Fragment implements RecyclerViewSwitchListener{
     private static final String TAG = "ClockFragment";
+    private static final int REQUEST_ADD = 1;
     private List<ClockItem> clockList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ClockListAdapter clockAdapter;
     private Button addBtn;
-    private static final int REQUEST_ADD = 1;
     private UserApiInterface userApiInterface;
     private ClockApiInterface clockApiInterface;
 
@@ -57,7 +56,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         //API
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         clockApiInterface = ApiClient.getClient().create(ClockApiInterface.class);
@@ -69,12 +67,11 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(clockAdapter);
+        setUpItemTouchHelper();
 
         //instance of progressBar
         generateProgressBar();
         prepareClockData();
-
-
 
 
         //alarm
@@ -166,6 +163,63 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         }
         clockAdapter.notifyDataSetChanged();
     }
+
+    /**
+     * set up ItemTouchHelper,  which is a utility that takes care of everything you need to add both drag & drop and swipe-to-dismiss to your RecyclerView
+     */
+    private void setUpItemTouchHelper() {
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                System.out.println("onSwiped");
+                int swipedPosition = viewHolder.getAdapterPosition();
+                String clockId = clockList.get(swipedPosition).getId();
+                clockAdapter.removeClockData(clockId);
+                Call<ReceivedClock> call = clockApiInterface.removeClock((((MainActivity) getActivity()).session.getToken()), clockId);
+                call.enqueue(new Callback<ReceivedClock>() {
+                    @Override
+                    public void onResponse(Call<ReceivedClock> call, Response<ReceivedClock> response) {
+                        Log.e(TAG, "onResponse message: " + response.message());
+                        if (!response.isSuccessful()) {
+                            Log.e(TAG, "failed to delete clock item " + response.message());
+                            return;
+                        }
+                        Log.e(TAG, "onResponse call.id: " + response.body().id);
+                        clockAdapter.removeClockData(response.body().id);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ReceivedClock> call, Throwable t) {
+                        Log.e(TAG, "failed to add clock item (onFailure) " + t.getMessage());
+                    }
+                });
+
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                //System.out.println("onChildDraw");
+            }
+
+        };
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+
 
     public void setAlarm(int wakeHour, int wakeMin, int sleepHour, int sleepMin){
         cancelAlarm();

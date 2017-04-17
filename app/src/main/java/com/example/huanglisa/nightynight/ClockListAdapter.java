@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,30 +13,6 @@ public class ClockListAdapter extends RecyclerView.Adapter<ClockListAdapter.Cloc
 
     private List<ClockItem> clockList;
     private RecyclerViewSwitchListener listener;
-
-
-    public class ClockListViewHolder extends RecyclerView.ViewHolder {
-        public TextView sleepTime, wakeTime;
-        public StatusSwitch onOff;
-
-        public ClockListViewHolder(View view, final RecyclerViewSwitchListener listener) {
-            super(view);
-            sleepTime = (TextView) view.findViewById(R.id.sleepTime);
-            wakeTime = (TextView) view.findViewById(R.id.wakeTime);
-            onOff = (StatusSwitch) view.findViewById(R.id.onOff);
-
-            onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                    if(listener != null && onOff.checkNeedUpdate()){
-                        listener.onViewSwitched(getAdapterPosition());
-                    }
-                }
-            });
-        }
-    }
 
 
     public ClockListAdapter(List<ClockItem> clockList, RecyclerViewSwitchListener listener) {
@@ -67,9 +42,44 @@ public class ClockListAdapter extends RecyclerView.Adapter<ClockListAdapter.Cloc
 
     }
 
-
     @Override
     public int getItemCount() {
         return clockList.size();
     }
+
+    public void removeClockData(String id) {
+        for (int i = clockList.size() - 1; i >= 0; i--) {
+            if (clockList.get(i).getId().equals(id)) {
+                clockList.remove(i);
+                System.out.format("notifyItemRemoved: %d%n", i);
+                notifyItemRemoved(i);
+            }
+        }
+    }
+
+    public class ClockListViewHolder extends RecyclerView.ViewHolder {
+        public TextView sleepTime, wakeTime;
+        public StatusSwitch onOff;
+
+        public ClockListViewHolder(View view, final RecyclerViewSwitchListener listener) {
+            super(view);
+            sleepTime = (TextView) view.findViewById(R.id.sleepTime);
+            wakeTime = (TextView) view.findViewById(R.id.wakeTime);
+            onOff = (StatusSwitch) view.findViewById(R.id.onOff);
+
+            onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                    if (listener != null && onOff.checkNeedUpdate()) {
+                        listener.onViewSwitched(getAdapterPosition());
+                    }
+                }
+            });
+        }
+    }
+
+
+
 }

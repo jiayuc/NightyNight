@@ -17,10 +17,16 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,9 +35,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final String GOOGLE_CLIENT_ID = "803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com";
+    private static final int RC_SIGN_IN = 1;
     SessionManager session;
     CallbackManager callbackManager;
     //ui component
@@ -41,15 +49,23 @@ public class LoginActivity extends AppCompatActivity {
     private TextView _signupLink;
     private UserApiInterface userApiInterface;
     private BuildingApiInterface buildingApiInterface;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         //set theme, transition from splash page
         super.onCreate(savedInstanceState);
-        // facebook loginNative, logging
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        // facebook login
         AppEventsLogger.activateApp(getApplication());
+        // google login
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(GOOGLE_CLIENT_ID) // pass the OAuth 2.0 client ID that was created for server
+                .requestEmail()
+                .build();
+
         // must be after two fb lines
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_login);
@@ -61,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
         // Session Manager for user management
         session = new SessionManager(getApplicationContext());
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-
 
         _emailText = (EditText) findViewById(R.id.input_email);
         _passwordText = (EditText) findViewById(R.id.input_password);
@@ -108,7 +123,41 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(LoginActivity.class.getCanonicalName(), error.getMessage());
             }
         });
+
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        // Edit google sign in button
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
+
+    } // end of onCreate
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                signIn();
+                break;
+            // ...
+        }
     }
+
+    private void signIn() {
+        System.out.print("google sign in ");
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        System.out.print("onConnectionFailed: " + result.toString());
+    }
+
 
     //log in when user text input
     public void loginNative() {
@@ -173,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, t.toString());
                 onLoginFail(null);
             }
-        });        
+        });
     }
 
     //used when email and password input
@@ -211,6 +260,13 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(true);
     }
 
+    /**
+     * Handler when activity result is returned
+     *
+     * @param requestCode - code that represents action requested
+     * @param resultCode  - code that represents result
+     * @param data        - Intent that contains activity data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //catch user info when sign up
@@ -221,9 +277,31 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_CANCELED) {
                 System.out.format("get here");
             }
+
+        } else if (requestCode == RC_SIGN_IN) {
+            Log.d(TAG, data.toString());
+            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleGoogleSignInResult(result);
         }
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleGoogleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleGoogleSignInResult:" + result.isSuccess() + result.getStatus());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            onLoginFail(acct.getDisplayName() + acct.getIdToken());
+            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getIdToken(), acct.getEmail());
+            onUserAPIResult(call);
+//            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+//            updateUI(true);
+        } else {
+            Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());
+            onLoginFail("google login failed: " + result.getStatus().getStatusMessage());
+        }
     }
 
     @Override
