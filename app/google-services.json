@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "803304289559",
+    "project_id": "nighty-night"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803304289559:android:21afc9633352518b",
+        "android_client_info": {
+          "package_name": "com.example.huanglisa.nightynight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.huanglisa.nightynight",
+            "certificate_hash": "28e3ebd46caba8f9480b0cc88d3e73769a0daf2a"
+          }
+        },
+        {
+          "client_id": "803304289559-atpfnn6je36a6qv1q60boe1qds492j8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjADx0Q69d1f5ZooEzUogwH8_sI3I6jB0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
