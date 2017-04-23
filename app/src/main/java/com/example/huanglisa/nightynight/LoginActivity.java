@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
 import java.util.List;
@@ -145,6 +146,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         signInButton.setSize(SignInButton.SIZE_WIDE);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
+        String firebaseToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Firebase token: " + firebaseToken);
+
     } // end of onCreate
 
     @Override
@@ -242,7 +246,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     //store user info
     public void onLoginSucess(String name, String email, String token, String password) {
-        System.out.print("Rest API successfully return login token: " + token);
+        Log.d(TAG, "onLoginSucess: Rest API successfully return login token: " + token);
         _loginButton.setEnabled(true);
         //!email and name will be actually returned from server
 
