@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "803304289559",
-    "project_id": "nighty-night"
+    "firebase_url": "https://nighty-night.firebaseio.com",
+    "project_id": "nighty-night",
+    "storage_bucket": "nighty-night.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,10 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "803304289559-ohjbeu56hbmerenl72fradr89qlh25q1.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com",
           "client_type": 1,
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803304289559-ohjbeu56hbmerenl72fradr89qlh25q1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -4,9 +4,9 @@ package com.example.huanglisa.nightynight.rest;
  * Created by huanglisa on 11/13/16.
  */
 
-import com.example.huanglisa.nightynight.ReceivedClock;
-import com.example.huanglisa.nightynight.ReceivedFriend;
-import com.example.huanglisa.nightynight.User;
+import com.example.huanglisa.nightynight.models.ReceivedClock;
+import com.example.huanglisa.nightynight.models.ReceivedFriend;
+import com.example.huanglisa.nightynight.models.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".activities.MainActivity">
     <item
         android:id="@+id/empty"
         android:icon="@drawable/ic_sysbar_menu"
@@ -22,6 +22,11 @@
                 android:icon="@android:drawable/ic_menu_help"
                 android:title="log out"
                 app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/menu_sign_out"
+                android:title="firebase sign out"
+                app:showAsAction="never"/>
         </menu>
 
     </item>

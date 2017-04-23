@@ -4,7 +4,7 @@ package com.example.huanglisa.nightynight.rest;
  * Created by huanglisa on 11/15/16.
  */
 
-import com.example.huanglisa.nightynight.ReceivedClock;
+import com.example.huanglisa.nightynight.models.ReceivedClock;
 
 import java.util.List;
 

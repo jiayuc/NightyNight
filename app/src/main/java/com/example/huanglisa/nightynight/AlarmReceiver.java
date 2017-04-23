@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.huanglisa.nightynight.activities.MainActivity;
+import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
 

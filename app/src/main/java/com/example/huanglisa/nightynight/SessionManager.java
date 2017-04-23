@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.huanglisa.nightynight.activities.LoginActivity;
+import com.example.huanglisa.nightynight.activities.MainActivity;
+import com.example.huanglisa.nightynight.models.ReceivedBuilding;
+import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;

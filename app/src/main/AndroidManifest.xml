@@ -21,10 +21,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.SignUpActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,17 +33,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailBuildingActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.DetailBuildingActivity"
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.huanglisa.nightynight.MainActivity"/>
+                android:value="com.example.huanglisa.nightynight.activities.MainActivity"/>
             <!-- for facebook loginNative -->
 
         </activity>
-        <activity android:name=".ClockSetterActivity"/>
-        <activity android:name=".individualActivity"/>
-        <activity android:name=".SettingActivity"/>
+        <activity android:name=".activities.ClockSetterActivity"/>
+        <activity android:name=".activities.individualActivity"/>
+        <activity android:name=".activities.SettingActivity"/>
 
         <receiver android:name=".AlarmReceiver"/>
 
@@ -78,6 +78,8 @@
         </service>
 
         <activity android:name=".chat.ChatActivity">
+        </activity>
+        <activity android:name=".activities.ScreenSlidePagerActivity">
         </activity>
     </application>
 

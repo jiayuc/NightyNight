@@ -1,6 +1,6 @@
 package com.example.huanglisa.nightynight.rest;
 
-import com.example.huanglisa.nightynight.ReceivedBuilding;
+import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 
 import java.util.List;
 

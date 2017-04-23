@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +9,19 @@
     android:paddingRight="24dp"
     android:paddingTop="56dp">
 
+    <Button
+        android:id="@+id/button_slide"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="jumpToSlider"
+        android:text="Jump to slider"/>
+
+    <Button
+        android:id="@+id/button_chat"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="jumpToChat"
+        android:text="Jump to chat"/>
 
     <!-- Email Label -->
     <android.support.design.widget.TextInputLayout
