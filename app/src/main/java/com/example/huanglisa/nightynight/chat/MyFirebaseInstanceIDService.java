@@ -1,4 +1,4 @@
-package com.example.huanglisa.nightynight;
+package com.example.huanglisa.nightynight.chat;
 
 import android.util.Log;
 

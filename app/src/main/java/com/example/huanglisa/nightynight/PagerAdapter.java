@@ -3,6 +3,7 @@ package com.example.huanglisa.nightynight;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 /**
  * Created by huanglisa on 11/1/16.
@@ -38,6 +39,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 System.out.format("case 2%n");
                 FriendPagerFragment tab3 = new FriendPagerFragment();
                 return tab3;
+            case 3:
+                Log.d("fragment tab switch: ", "case 3%n");
+                MessagePagerFragment tab4 = new MessagePagerFragment();
+                return tab4;
             default:
                 return null;
         }

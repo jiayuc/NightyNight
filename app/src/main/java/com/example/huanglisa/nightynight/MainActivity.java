@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         //pager
         final CustomViewPager viewPager = (CustomViewPager) findViewById(R.id.pager);
-        PagerAdapter pageAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
+        PagerAdapter pageAdapter = new PagerAdapter(getSupportFragmentManager(), 4);
         viewPager.setAdapter(pageAdapter);
         viewPager.setCurrentItem(0);
         viewPager.setPagingEnabled(false);
@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_users:
                 createTabIntent(2);
+                break;
+            case R.id.action_message:
+                createTabIntent(3);
                 break;
             case R.id.action_logout:
                 session.logoutUser();
