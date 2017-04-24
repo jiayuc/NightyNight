@@ -18,10 +18,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.AlarmReceiver;
 import com.example.huanglisa.nightynight.models.ClockItem;
@@ -93,6 +97,28 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(clockAdapter);
         setUpItemTouchHelper();
+        // TODO: NEWLY ADDED, item touch feature
+        final Context context = getActivity().getApplicationContext();
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        // TODO Handle item click
+                        ClockItem clock = clockList.get(position);
+                        TimePicker picker = new TimePicker(context);
+                        picker.setHour(clock.getSleepHour());
+                        picker.setMinute(clock.getSleepMin());
+
+
+                        Log.e(TAG, "clock item  at pos " + position + " id: " + clock.getId());
+                        Toast.makeText(context, clock.getId() + " is selected!", Toast.LENGTH_SHORT).show();
+                        // jump to activity
+                        Intent intent = new Intent(context, ClockSetterActivity.class);
+                        intent.putExtra("EXTRA_SESSION_ID", "hello");
+                        startActivity(intent);
+                    }
+                })
+        );
 
         //instance of progressBar
         generateProgressBar();
@@ -143,6 +169,12 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                 return false;
             }
 
+            /**
+             * Delete set of alarm clocks when swiped
+             *
+             * @param viewHolder
+             * @param swipeDir
+             */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 System.out.println("onSwiped");
@@ -265,6 +297,13 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
 
     }
 
+    /**
+     * Add new set of alarm clocks to server via API, and update, notify the adapter
+     * @param sleepHour
+     * @param sleepMin
+     * @param wakeHour
+     * @param wakeMin
+     */
     public void addClockData(int sleepHour, int sleepMin, int wakeHour, int wakeMin) {
 
         Call<ReceivedClock> call = clockApiInterface.addClock(((MainActivity) getActivity()).session.getToken(), sleepHour, sleepMin, wakeHour, wakeMin);
@@ -290,6 +329,7 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         });
 
     }
+
 
     @Override
     public void onViewSwitched(int pos) {
@@ -349,6 +389,13 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
 
     }
 
+    /**
+     * Set android system clock to be waken up
+     * @param wakeHour
+     * @param wakeMin
+     * @param sleepHour
+     * @param sleepMin
+     */
     public void setAlarm(int wakeHour, int wakeMin, int sleepHour, int sleepMin) {
         cancelAlarm();
         setPendingIntent();
@@ -387,7 +434,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         System.out.format("wake clock: %d%n", wakeCalendar.getTimeInMillis());
         alarmManager.set(AlarmManager.RTC_WAKEUP, wakeCalendar.getTimeInMillis(), pendingWakeIntent);
 
-
         AlarmManager.AlarmClockInfo info = alarmManager.getNextAlarmClock();
         if (info != null) {
             System.out.format("tigger time: %d%n", info.getTriggerTime());
@@ -403,4 +449,8 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         pendingWakeIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmWakeReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+
 }
+
+
+

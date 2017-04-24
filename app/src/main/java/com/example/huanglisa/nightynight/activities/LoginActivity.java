@@ -235,6 +235,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    //store user info
+    public void onLoginSucess(String name, String email, String token, String password) {
+        Log.d(TAG, "onLoginSucess: Rest API successfully return login token: " + token);
+        _loginButton.setEnabled(true);
+        //!email and name will be actually returned from server
+
+        session.createLoginSession(name, email, token, password);
+
+        setResult(RESULT_OK, null);
+        finish();
+    }
+
     /**
      * Called when activity view is clicked
      *
@@ -253,18 +265,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 //                startActivity(intent);
 //                break;
         }
-    }
-
-    //store user info
-    public void onLoginSucess(String name, String email, String token, String password) {
-        Log.d(TAG, "onLoginSucess: Rest API successfully return login token: " + token);
-        _loginButton.setEnabled(true);
-        //!email and name will be actually returned from server
-
-        session.createLoginSession(name, email, token, password);
-
-        setResult(RESULT_OK, null);
-        finish();
     }
 
     private void onUserAPIResult(Call<User> call) {
@@ -343,9 +343,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void jumpToSlider(View v) {
-        Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ClockSetterActivity.class);
+//        Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
         startActivity(intent);
     }
+
 
     private void googleSignIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
