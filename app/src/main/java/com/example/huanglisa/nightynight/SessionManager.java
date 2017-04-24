@@ -190,7 +190,7 @@ public class SessionManager {
     }
 
     public void updateBuilding(ReceivedBuilding rb) {
-        String buildingString = pref.getString(KEY_BUILDINGS, null);
+        String buildingString = pref.getString(KEY_BUILDINGS, "");
         buildingString = buildingString.concat("|" + rb.id + "," + rb.name + "," + rb.index);
         System.out.format("updated buildingString %s%n", buildingString);
         editor.putString(KEY_BUILDINGS, buildingString);
