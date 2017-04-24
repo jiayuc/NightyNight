@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.chat.ChatActivity;
 import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.SessionManager;
 import com.example.huanglisa.nightynight.models.User;
@@ -335,11 +334,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onBackPressed() {
         // Disable going back to the MainActivity
         moveTaskToBack(true);
-    }
-
-    public void jumpToChat(View v) {
-        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-        startActivity(intent);
     }
 
     public void jumpToSlider(View v) {

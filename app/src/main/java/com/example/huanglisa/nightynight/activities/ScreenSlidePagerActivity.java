@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.fragments.MessagePagerFragment;
+import com.example.huanglisa.nightynight.fragments.MessageFragment;
 
 public class ScreenSlidePagerActivity extends FragmentActivity {
     /**
@@ -63,7 +63,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new MessagePagerFragment();
+            return new MessageFragment();
         }
 
         @Override

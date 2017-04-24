@@ -61,6 +61,10 @@ public class SessionManager {
         return pref.getString(KEY_EMAIL, "");
     }
 
+    public String getName() {
+        return pref.getString(KEY_NAME, "");
+    }
+
     //create new loginNative page if not log in
     public void checkLogin() {
         if (!this.isLoggedIn()) {

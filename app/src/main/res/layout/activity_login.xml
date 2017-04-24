@@ -16,13 +16,6 @@
         android:onClick="jumpToSlider"
         android:text="Jump to slider"/>
 
-    <Button
-        android:id="@+id/button_chat"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:onClick="jumpToChat"
-        android:text="Jump to chat"/>
-
     <!-- Email Label -->
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

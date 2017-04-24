@@ -55,6 +55,8 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     private static final String TAG = "ClockFragment";
     private static final int REQUEST_ADD = 1;
     private List<ClockItem> clockList = new ArrayList<>();
+    private boolean clockListInitiated = false;
+    private boolean sessionAttached = false;
     private RecyclerView recyclerView;
     private ClockListAdapter clockAdapter;
     private Button addBtn;
@@ -85,6 +87,7 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: "+this.toString());
+        sessionAttached = true;
         //API
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         clockApiInterface = ApiClient.getClient().create(ClockApiInterface.class);
@@ -121,8 +124,8 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         );
 
         //instance of progressBar
-        generateProgressBar();
-        prepareClockData();
+        //generateProgressBar();
+        //prepareClockData();
 
 
         //alarm
@@ -155,6 +158,30 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         return view;
 
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d(TAG, "onStart");
+        if (!clockListInitiated && sessionAttached){
+            generateProgressBar();
+            prepareClockData();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        Log.d(TAG, "setUserVisibleHint: "+this.toString());
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser)
+            return;
+        if (!sessionAttached)
+            return;
+        if (!clockListInitiated){
+            generateProgressBar();
+            prepareClockData();
+        }
     }
 
     /**
@@ -241,6 +268,8 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     }
 
     private void prepareClockData() {
+        Log.d(TAG, "prepareClockData");
+        clockListInitiated = true;
         progress.show();
         Call<ReceivedClock> getActiveClockCall = userApiInterface.userGetActiveClock(((MainActivity) getActivity()).session.getToken());
         getActiveClockCall.enqueue(new Callback<ReceivedClock>() {
@@ -248,6 +277,9 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
             public void onResponse(Call<ReceivedClock> call1, Response<ReceivedClock> response) {
                 if (!response.isSuccessful()) {
                     Log.e(TAG, "failed to get activated clock " + response.body());
+                    //When a user log out, ClockFragment will be re-created while the new user haven't logged in.
+                    //We need to disable old clockListInitiated, so that when new user log in, it will initiate clockList again.
+                    clockListInitiated = false;
                     progress.dismiss();
                     return;
                 }

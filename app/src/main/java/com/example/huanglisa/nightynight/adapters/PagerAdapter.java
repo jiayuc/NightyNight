@@ -8,7 +8,7 @@ import android.util.Log;
 import com.example.huanglisa.nightynight.fragments.BuildingFragment;
 import com.example.huanglisa.nightynight.fragments.ClockFragment;
 import com.example.huanglisa.nightynight.fragments.FriendPagerFragment;
-import com.example.huanglisa.nightynight.fragments.MessagePagerFragment;
+import com.example.huanglisa.nightynight.fragments.MessageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
-        mFragments.add(0, null);
-        mFragments.add(1, null);
-        mFragments.add(2, null);
-        mFragments.add(3, null);
+        for(int i=0; i < NumOfTabs; i++)
+            mFragments.add(i, null);
     }
 
     /**
@@ -73,7 +71,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                     return mFragments.get(3);
 
                 Log.d("fragment tab switch: ", "case 3 create");
-                MessagePagerFragment tab4 = new MessagePagerFragment();
+                MessageFragment tab4 = new MessageFragment();
                 mFragments.set(3, tab4);
                 return tab4;
             default:

@@ -1,5 +1,6 @@
 package com.example.huanglisa.nightynight.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.huanglisa.nightynight.activities.MainActivity;
 import com.example.huanglisa.nightynight.dialogs.FriendConfirmDialog;
 import com.example.huanglisa.nightynight.models.FriendItem;
 import com.example.huanglisa.nightynight.R;
@@ -44,6 +46,7 @@ public class FriendFragment extends Fragment {
     private FriendListAdapter friendListAdapter;
     private Button addBtn;
     private SessionManager session;
+    private MainActivity mainActivity;
     private FriendApiInterface friendApiInterface;
     private BuildingApiInterface buildingApiInterface;
     private String serverBuildingId;
@@ -76,6 +79,8 @@ public class FriendFragment extends Fragment {
 
 
         session = new SessionManager(getContext().getApplicationContext());
+        this.mainActivity = (MainActivity)this.getActivity();
+
         friendApiInterface = ApiClient.getClient().create(FriendApiInterface.class);
         buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);
 
@@ -87,6 +92,18 @@ public class FriendFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         friendListAdapter = new FriendListAdapter(friendList);
         recyclerView.setAdapter(friendListAdapter);
+        final Context context = getActivity().getApplicationContext();
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Log.d(TAG, friendList.get(position).getId());
+                        mainActivity.setSelectedFriendEmail(friendList.get(position).getId());
+                        mainActivity.setSelectedFriendName(friendList.get(position).getName());
+                        mainActivity.createTabIntent(3);
+                    }
+                })
+        );
 
         buildingName = (TextView) view.findViewById(R.id.buildingName);
 

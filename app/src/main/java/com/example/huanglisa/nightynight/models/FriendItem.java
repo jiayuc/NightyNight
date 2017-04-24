@@ -24,6 +24,10 @@ public class FriendItem {
         return this.name;
     }
 
+    public String getId() {
+        return this.id;
+    }
+
     public boolean getStatus() {
         return this.status;
     }
