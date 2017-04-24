@@ -247,26 +247,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         finish();
     }
 
-    /**
-     * Called when activity view is clicked
-     *
-     * @param v view that's clicked
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                googleSignIn();
-                break;
-//            TODO: not working and why
-//            case R.id.button:
-//                Log.d(TAG, "skip!!!");
-//                Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
-//                startActivity(intent);
-//                break;
-        }
-    }
-
     private void onUserAPIResult(Call<User> call) {
         call.enqueue(new Callback<User > () {
             @Override
@@ -320,6 +300,26 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
+    /**
+     * Called when activity view is clicked
+     *
+     * @param v view that's clicked
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                googleSignIn();
+                break;
+//            TODO: not working and why
+//            case R.id.button:
+//                Log.d(TAG, "skip!!!");
+//                Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
+//                startActivity(intent);
+//                break;
+        }
+    }
+
     //indicate user log in failed
     public void onLoginFail(String message) {
         Log.i(TAG, "onLoginFail: " + message);
@@ -343,8 +343,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void jumpToSlider(View v) {
-        Intent intent = new Intent(getApplicationContext(), ClockSetterActivity.class);
-//        Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
         startActivity(intent);
     }
 

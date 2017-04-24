@@ -91,7 +91,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         //API
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         clockApiInterface = ApiClient.getClient().create(ClockApiInterface.class);
@@ -118,7 +117,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                         picker.setMinute(clock.getSleepMin());
 
                         Log.d(TAG, "clock item  at pos " + position + " id: " + clock.getId());
-                        Toast.makeText(context, clock.getId() + " is selected!", Toast.LENGTH_SHORT).show();
                         // jump to activity
                         Intent intent = new Intent(getActivity(), ClockSetterActivity.class);
                         ClockMsgPacker packer = new ClockMsgPacker();

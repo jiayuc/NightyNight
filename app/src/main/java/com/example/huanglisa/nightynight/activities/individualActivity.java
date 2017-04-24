@@ -23,7 +23,6 @@ public class individualActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         name.setText(intent.getExtras().getString("name"));
-
         status.setText(convertStatus(intent.getExtras().getBoolean("status")));
 
         Toolbar toolBar = (Toolbar) findViewById(R.id.my_toolbar);

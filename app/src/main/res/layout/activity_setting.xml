@@ -8,6 +8,16 @@
                 android:gravity="center_horizontal"
                 tools:context="com.example.huanglisa.nightynight.activities.individualActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="230dp"
+        android:scaleY="1.3"
+        android:src="@drawable/profile_background"
+        android:translationY="-60dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,12 +26,13 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:src="@drawable/profile"
-
-            />
+            app:civ_border_color="#FFFFFFFF"
+            app:civ_border_width="3dp"/>
 
         <RelativeLayout
             android:layout_width="160dp"
@@ -33,7 +44,7 @@
                 android:id="@+id/change_pic"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/instagram_logo" />
+                android:src="@drawable/instagram_logo"/>
         </RelativeLayout>
     </LinearLayout>
 
@@ -42,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingRight="0dp"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/ToolbarTheme"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +62,24 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="5dp">
+        android:paddingTop="0dp">
+
+        <!-- google login -->
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_signin_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/common_signin_button_text_long"/>
+
+        <!-- facebook login button -->
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="5dp"/>
 
         <RelativeLayout
             android:id="@+id/statusBlock"
@@ -63,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#e0e0e0"
-
                 />
 
             <LinearLayout
@@ -79,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="current status"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/userStatus"
@@ -88,7 +115,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
                     android:text="awake"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <Switch
@@ -98,21 +125,14 @@
                 android:checked="true"
                 android:gravity="center_vertical"
                 android:paddingEnd="20dp"
-                android:theme="@style/SCBSwitch" />
+                android:theme="@style/SCBSwitch"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/statusText"
-                android:background="#c1c1c1" />
+                android:background="#c1c1c1"/>
         </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:paddingStart="30dp"
-            android:text="By toggling the switch you can change your current status. When it's on, it means that you are awake now " />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -122,7 +142,7 @@
                 android:id="@+id/nameBlock"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e0e0e0" />
+                android:background="#e0e0e0"/>
 
             <TextView
                 android:id="@+id/userName"
@@ -132,7 +152,7 @@
                 android:gravity="center_vertical"
                 android:hint="name"
                 android:paddingStart="30dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <ImageView
                 android:id="@+id/editName"
@@ -143,13 +163,13 @@
                 android:paddingRight="30dp"
                 android:scaleX="0.6"
                 android:scaleY="0.6"
-                android:src="@drawable/pencil" />
+                android:src="@drawable/pencil"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/userName"
-                android:background="#c1c1c1" />
+                android:background="#c1c1c1"/>
         </RelativeLayout>
 
 
@@ -181,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="address"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/userAddress"
@@ -190,7 +210,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
                     android:text="412 w elms street, urbana, IL, 61801"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <ImageView
@@ -202,13 +222,13 @@
                 android:paddingRight="30dp"
                 android:scaleX="0.6"
                 android:scaleY="0.6"
-                android:src="@drawable/pencil" />
+                android:src="@drawable/pencil"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/addressText"
-                android:background="#c1c1c1" />
+                android:background="#c1c1c1"/>
         </RelativeLayout>
 
 
@@ -240,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="phone"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/userPhone"
@@ -249,7 +269,7 @@
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
                     android:text="(610)-618-0076"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <ImageView
@@ -261,13 +281,13 @@
                 android:paddingRight="30dp"
                 android:scaleX="0.6"
                 android:scaleY="0.6"
-                android:src="@drawable/pencil" />
+                android:src="@drawable/pencil"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignBottom="@id/phoneText"
-                android:background="#c1c1c1" />
+                android:background="#c1c1c1"/>
         </RelativeLayout>
 
 
