@@ -24,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.AlarmReceiver;
@@ -104,9 +105,17 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                     public void onItemClick(View view, int position) {
                         // TODO Handle item click
                         ClockItem clock = clockList.get(position);
-                        Log.e(TAG, "clock item  at pos " + position + " id: " + clock.getId());
-//                        Toast.makeText(context, clock.getId() + " is selected!", Toast.LENGTH_SHORT).show();
+                        TimePicker picker = new TimePicker(context);
+                        picker.setHour(clock.getSleepHour());
+                        picker.setMinute(clock.getSleepMin());
 
+
+                        Log.e(TAG, "clock item  at pos " + position + " id: " + clock.getId());
+                        Toast.makeText(context, clock.getId() + " is selected!", Toast.LENGTH_SHORT).show();
+                        // jump to activity
+                        Intent intent = new Intent(context, ClockSetterActivity.class);
+                        intent.putExtra("EXTRA_SESSION_ID", "hello");
+                        startActivity(intent);
                     }
                 })
         );

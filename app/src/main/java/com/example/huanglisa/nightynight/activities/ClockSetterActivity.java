@@ -3,7 +3,9 @@ package com.example.huanglisa.nightynight.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TimePicker;
 
 import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.CustomViewPager;
@@ -11,6 +13,7 @@ import com.example.huanglisa.nightynight.adapters.PagerClockSetterAdapter;
 import com.example.huanglisa.nightynight.R;
 
 public class ClockSetterActivity extends AppCompatActivity {
+    private static final String TAG = "ClockSetterActivity";
     public CustomViewPager viewPager;
     public ClockItem clockItem = new ClockItem();
 
@@ -18,6 +21,14 @@ public class ClockSetterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock_setter);
+
+        // retrieve passed in params if any
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("EXTRA_SESSION_ID");
+            Log.e(TAG, "received param: " + value);
+            //The key argument here must match that used in the other activity
+        }
 
         //create back arrow
         Toolbar toolBar = (Toolbar) findViewById(R.id.my_toolbar);
