@@ -90,15 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_building:
+                Log.d(TAG, "action_building");
                 createTabIntent(0);
                 break;
             case R.id.action_clock:
+                Log.d(TAG, "action_clock");
                 createTabIntent(1);
                 break;
             case R.id.action_users:
+                Log.d(TAG, "action_users");
                 createTabIntent(2);
                 break;
             case R.id.action_message:
+                Log.d(TAG, "action_message");
                 createTabIntent(3);
                 break;
             case R.id.action_logout:

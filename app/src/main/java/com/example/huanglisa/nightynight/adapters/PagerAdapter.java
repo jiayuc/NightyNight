@@ -33,15 +33,15 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                System.out.format("case 0%n");
+                Log.d("fragment tab switch: ", "case 0");
                 BuildingFragment tab1 = new BuildingFragment();
                 return tab1;
             case 1:
-                System.out.format("case 1%n");
+                Log.d("fragment tab switch: ", "case 1");
                 ClockFragment tab2 = new ClockFragment();
                 return tab2;
             case 2:
-                System.out.format("case 2%n");
+                Log.d("fragment tab switch: ", "case 2 ");
                 FriendPagerFragment tab3 = new FriendPagerFragment();
                 return tab3;
             case 3:
