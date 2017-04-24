@@ -126,7 +126,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                     @Override
                     public void onItemClick(View view, int position) {
                         positionClicked = position;
-                        // TODO Handle item click
                         ClockItem clock = clockList.get(position);
                         TimePicker picker = new TimePicker(context);
                         picker.setHour(clock.getSleepHour());
@@ -318,7 +317,6 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                     Log.d(TAG, "failed to update clock item " + response.message());
                     return;
                 }
-
 
                 ClockItem cItem = new ClockItem(response.body().sleepHour, response.body().sleepMin, response.body().wakeHour, response.body().wakeMin, response.body().id, false);
                 clockList.set(positionClicked, cItem);

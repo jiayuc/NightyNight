@@ -46,6 +46,12 @@ public class MessageFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseListAdapter<ChatMessage> adapter;
 
+    /**
+     * Set a hint to the system about whether this fragment's UI is currently visible to the user.
+     * This hint defaults to true and is persistent across fragment instance state save and restore.
+     *
+     * @param isVisibleToUser indicate whether is visible to user
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -55,6 +61,14 @@ public class MessageFragment extends Fragment {
             prepareChat();
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * This is optional, and non-graphical fragments can return null (default)
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -65,12 +79,18 @@ public class MessageFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Called when fragment starts
+     */
     @Override
     public void onStart() {
         super.onStart();
         prepareChat();
     }
 
+    /**
+     * Called when fragment view is destroyed
+     */
     @Override
     public void onDestroyView() {
         Log.d(TAG, "onDestroyView");
@@ -82,6 +102,9 @@ public class MessageFragment extends Fragment {
         receiverName = "";
     }
 
+    /**
+     * Retrieve chat history from firebase
+     */
     private void prepareChat() {
         Log.d(TAG, "prepareChat");
 
@@ -98,13 +121,15 @@ public class MessageFragment extends Fragment {
         if (receiverEmail.equals(""))
             return;
 
-        //get chatroom string
+        // get chatroom string
         String chatRoom = setChatRoomInfo();
-
         Log.d(TAG, "update chat history");
         contactFirebase(chatRoom);
     }
 
+    /**
+     * Get sender/receiver emails from the activity
+     */
     private void getSenderReceiver() {
         SessionManager session = new SessionManager(getContext().getApplicationContext());
         MainActivity mainActivity = (MainActivity) getActivity();
@@ -118,6 +143,10 @@ public class MessageFragment extends Fragment {
         receiverName = mainActivity.getSelectedFriendName();
     }
 
+    /**
+     * Calculate chatroom name from sender/receiver emails
+     * @return chatroom name
+     */
     private String setChatRoomInfo() {
         String chatRoom;
         if (myEmail.compareTo(receiverEmail) < 0)
@@ -127,8 +156,13 @@ public class MessageFragment extends Fragment {
         return chatRoom.replaceAll("[.#$]", "-");
     }
 
+    /**
+     * Contact firebase database, get data on given chatroom
+     * @param chatRoom
+     */
     private void contactFirebase(final String chatRoom) {
         mAuth = FirebaseAuth.getInstance();
+        // signin Anoymously for now
         mAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -147,6 +181,7 @@ public class MessageFragment extends Fragment {
                     }
                 });
 
+        // the send button
         FloatingActionButton fab =
                 (FloatingActionButton) getView().findViewById(R.id.fab_f);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +211,10 @@ public class MessageFragment extends Fragment {
 
     }
 
+    /**
+     * Display retrived chat history to activity
+     * @param chatRoom
+     */
     private void displayChatMessages(String chatRoom) {
         ListView listOfMessages = (ListView) getView().findViewById(R.id.list_of_messages_f);
 

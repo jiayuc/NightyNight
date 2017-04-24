@@ -23,10 +23,6 @@
                 android:title="log out"
                 app:showAsAction="ifRoom"/>
 
-            <item
-                android:id="@+id/menu_sign_out"
-                android:title="firebase sign out"
-                app:showAsAction="never"/>
         </menu>
 
     </item>

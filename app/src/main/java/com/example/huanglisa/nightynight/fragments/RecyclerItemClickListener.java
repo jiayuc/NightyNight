@@ -13,6 +13,12 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     GestureDetector mGestureDetector;
     private OnItemClickListener mListener;
 
+    /**
+     * Listen for onclick events
+     *
+     * @param context
+     * @param listener
+     */
     public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -42,6 +48,6 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 } // end OnItemTouchListener

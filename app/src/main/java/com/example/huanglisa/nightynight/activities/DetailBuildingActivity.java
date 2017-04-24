@@ -67,6 +67,11 @@ public class DetailBuildingActivity extends AppCompatActivity {
     private SessionManager session;
     private List<ReceivedFriend> friendList;
 
+    /**
+     * Called when activity is created
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,11 +157,19 @@ public class DetailBuildingActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Called when option item is selected among menu
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
     }
 
+    /**
+     * Called when backpressed
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -30,16 +30,26 @@ public class SleepClockFragment extends Fragment {
     private ClockListAdapter clockAdapter;
     private Button nextBtn;
     private TimePicker tp;
-    //private static final int REQUEST_ADD = 1;
 
+    /**
+     * Called when activity is done, left with the result. Pass to parent activity
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*if( requestCode == REQUEST_ADD ) {
-            System.out.format("add %n");
-        }*/
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Called when view is created
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // parse passed in data if any
@@ -60,8 +70,8 @@ public class SleepClockFragment extends Fragment {
             tp.setMinute(clockOld.getSleepMin());
         }
 
+        // next button leads to wake fragment
         nextBtn = (Button) view.findViewById(R.id.button);
-
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
