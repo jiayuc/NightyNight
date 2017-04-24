@@ -20,7 +20,7 @@
         android:headerBackground="@color/colorWhite"
         android:headerTimeTextAppearance="@style/Theme.MyTheme.TimePicker"
         android:numbersBackgroundColor="@color/colorWhite"
-        android:numbersSelectorColor="@color/colorBlue" />
+        android:numbersSelectorColor="@color/colorBlue"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="Set"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"/>
     </RelativeLayout>
 
 </LinearLayout>

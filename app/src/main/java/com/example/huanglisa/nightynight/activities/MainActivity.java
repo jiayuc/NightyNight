@@ -11,9 +11,9 @@ import android.view.MenuItem;
 
 import com.example.huanglisa.nightynight.CustomViewPager;
 import com.example.huanglisa.nightynight.EnhancedMenuInflater;
-import com.example.huanglisa.nightynight.adapters.PagerAdapter;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.adapters.PagerAdapter;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 
 import java.net.MalformedURLException;
@@ -133,16 +133,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //the getter/setter is used to propagate information from FriendFragment to MessageFragment
-    public String getSelectedFriendEmail(){
+    public String getSelectedFriendEmail() {
         return selectedFriendEmail;
     }
-    public void setSelectedFriendEmail(String email){
+
+    public void setSelectedFriendEmail(String email) {
         selectedFriendEmail = email;
     }
-    public String getSelectedFriendName(){
+
+    public String getSelectedFriendName() {
         return selectedFriendName;
     }
-    public void setSelectedFriendName(String name){
+
+    public void setSelectedFriendName(String name) {
         selectedFriendName = name;
     }
 

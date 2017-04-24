@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingRight="0dp"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/ToolbarTheme"/>
 
 
     <ImageView
@@ -21,21 +21,22 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_star"
         android:translationX="30dp"
-        android:translationY="150dp" />
+        android:translationY="150dp"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_star"
         android:translationX="200dp"
-        android:translationY="60dp" />
+        android:translationY="60dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_star"
         android:translationX="320dp"
-        android:translationY="180dp" />
+        android:translationY="180dp"/>
 
     <ImageView
         android:id="@+id/detailBuilding"
@@ -43,7 +44,7 @@
         android:layout_height="478dp"
         android:layout_gravity="bottom|center_horizontal"
         android:clickable="true"
-        android:src="@drawable/detail_building" />
+        android:src="@drawable/detail_building"/>
 
 
     <ImageView
@@ -55,7 +56,20 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="210dp" />
+        android:translationY="210dp"/>
+
+    <TextView
+        android:id="@+id/nameTag1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied1"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="65dp"
+        android:translationY="280dp"/>
+
 
     <ImageView
         android:id="@+id/curtain2"
@@ -67,7 +81,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="480dp" />
+        android:translationY="480dp"/>
+
+    <TextView
+        android:id="@+id/nameTag2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied2"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="65dp"
+        android:translationY="550dp"/>
 
     <ImageView
         android:id="@+id/curtain3"
@@ -79,8 +105,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="390dp" />
+        android:translationY="390dp"/>
 
+    <TextView
+        android:id="@+id/nameTag3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied3"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="65dp"
+        android:translationY="460dp"/>
 
     <ImageView
         android:id="@+id/curtain4"
@@ -92,7 +129,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="580dp" />
+        android:translationY="580dp"/>
+
+    <TextView
+        android:id="@+id/nameTag4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied4"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="65dp"
+        android:translationY="645dp"/>
 
     <ImageView
         android:id="@+id/curtain5"
@@ -104,8 +153,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="300dp" />
+        android:translationY="300dp"/>
 
+    <TextView
+        android:id="@+id/nameTag5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied5"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="65dp"
+        android:translationY="370dp"/>
 
     <ImageView
         android:id="@+id/curtain6"
@@ -117,7 +177,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="210dp" />
+        android:translationY="210dp"/>
+
+    <TextView
+        android:id="@+id/nameTag6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied6"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="154dp"
+        android:translationY="280dp"/>
 
     <ImageView
         android:id="@+id/curtain7"
@@ -129,7 +201,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="480dp" />
+        android:translationY="480dp"/>
+
+    <TextView
+        android:id="@+id/nameTag7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied7"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="154dp"
+        android:translationY="550dp"/>
 
     <ImageView
         android:id="@+id/curtain8"
@@ -141,8 +225,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="390dp" />
+        android:translationY="390dp"/>
 
+    <TextView
+        android:id="@+id/nameTag8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied8"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="154dp"
+        android:translationY="460dp"/>
 
     <ImageView
         android:id="@+id/curtain9"
@@ -154,7 +249,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="580dp" />
+        android:translationY="580dp"/>
+
+    <TextView
+        android:id="@+id/nameTag9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied9"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="154dp"
+        android:translationY="645dp"/>
 
     <ImageView
         android:id="@+id/curtain10"
@@ -166,8 +273,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="300dp" />
+        android:translationY="300dp"/>
 
+    <TextView
+        android:id="@+id/nameTag10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied10"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="154dp"
+        android:translationY="370dp"/>
 
     <ImageView
         android:id="@+id/curtain11"
@@ -179,7 +297,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="210dp" />
+        android:translationY="210dp"/>
+
+    <TextView
+        android:id="@+id/nameTag11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied11"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="245dp"
+        android:translationY="280dp"/>
 
     <ImageView
         android:id="@+id/curtain12"
@@ -191,7 +321,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="480dp" />
+        android:translationY="480dp"/>
+
+    <TextView
+        android:id="@+id/nameTag12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied12"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="245dp"
+        android:translationY="550dp"/>
 
     <ImageView
         android:id="@+id/curtain13"
@@ -203,8 +345,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="390dp" />
+        android:translationY="390dp"/>
 
+    <TextView
+        android:id="@+id/nameTag13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied13"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="245dp"
+        android:translationY="460dp"/>
 
     <ImageView
         android:id="@+id/curtain14"
@@ -216,7 +369,19 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="580dp" />
+        android:translationY="580dp"/>
+
+    <TextView
+        android:id="@+id/nameTag14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied14"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="245dp"
+        android:translationY="645dp"/>
 
     <ImageView
         android:id="@+id/curtain15"
@@ -229,18 +394,30 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="300dp" />
-    <!--<ImageView-->
-        <!--android:id="@+id/curtain15"-->
-        <!--android:layout_width="49dp"-->
+        android:translationY="300dp"/>
 
-        <!--android:layout_height="67dp"-->
-        <!--android:clickable="true"-->
-        <!--android:elevation="21dp"-->
-        <!--android:scaleX="0.8"-->
-        <!--android:scaleY="1.1"-->
-        <!--android:src="@drawable/curtain"-->
-        <!--android:translationX="245dp"-->
-        <!--android:translationY="210dp" />-->
+    <TextView
+        android:id="@+id/nameTag15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/curtain1"
+        android:layout_centerInParent="true"
+        android:text="Non-occupied15"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp"
+        android:translationX="245dp"
+        android:translationY="370dp"/>
+    <!--<ImageView-->
+    <!--android:id="@+id/curtain15"-->
+    <!--android:layout_width="49dp"-->
+
+    <!--android:layout_height="67dp"-->
+    <!--android:clickable="true"-->
+    <!--android:elevation="21dp"-->
+    <!--android:scaleX="0.8"-->
+    <!--android:scaleY="1.1"-->
+    <!--android:src="@drawable/curtain"-->
+    <!--android:translationX="245dp"-->
+    <!--android:translationY="210dp" />-->
 
 </FrameLayout>

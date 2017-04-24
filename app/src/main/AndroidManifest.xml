@@ -66,21 +66,19 @@
             </intent-filter>
         </activity>
         <!-- firebase cloud messaging service -->
-        <service android:name=".chat.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-        <service android:name=".chat.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+        <!--<service android:name=".chat.MyFirebaseInstanceIDService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service android:name=".chat.MyFirebaseMessagingService">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+        <!--</intent-filter>-->
+        <!--</service>-->
 
-        <activity android:name=".chat.ChatActivity">
-        </activity>
-        <activity android:name=".activities.ScreenSlidePagerActivity">
-        </activity>
+        <!--<activity android:name=".chat.ChatActivity">-->
+        <!--</activity>-->
     </application>
 
 </manifest>

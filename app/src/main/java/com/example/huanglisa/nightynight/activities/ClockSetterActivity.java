@@ -5,12 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TimePicker;
 
-import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.CustomViewPager;
-import com.example.huanglisa.nightynight.adapters.PagerClockSetterAdapter;
 import com.example.huanglisa.nightynight.R;
+import com.example.huanglisa.nightynight.adapters.PagerClockSetterAdapter;
+import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 public class ClockSetterActivity extends AppCompatActivity {

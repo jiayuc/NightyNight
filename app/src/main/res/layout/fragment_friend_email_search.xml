@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
@@ -14,12 +14,12 @@
         android:paddingTop="10dp"
         android:text="Add New Friend"
         android:textColor="@color/colorBlack"
-        android:textSize="18dp" />
+        android:textSize="18dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/colorControlHighlight" />
+        android:background="?attr/colorControlHighlight"/>
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/friend_email"
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:hint="email address"
         android:textColor="@color/colorGrey"
-        android:textSize="24dp" />
+        android:textSize="24dp"/>
 
     <TextView
         android:id="@+id/explanation"
@@ -39,5 +39,5 @@
         android:gravity="center_horizontal"
         android:paddingTop="10dp"
         android:text="type in email address to see if your friend is using this app."
-        android:textSize="12sp" />
+        android:textSize="12sp"/>
 </LinearLayout>

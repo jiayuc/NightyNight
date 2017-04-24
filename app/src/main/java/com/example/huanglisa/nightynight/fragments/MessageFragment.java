@@ -14,9 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huanglisa.nightynight.activities.MainActivity;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.activities.MainActivity;
 import com.example.huanglisa.nightynight.models.ChatMessage;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +47,15 @@ public class MessageFragment extends Fragment {
     private FirebaseListAdapter<ChatMessage> adapter;
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser)
+            return;
+        if (sessionAttached)
+            prepareChat();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,7 +66,13 @@ public class MessageFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView(){
+    public void onStart() {
+        super.onStart();
+        prepareChat();
+    }
+
+    @Override
+    public void onDestroyView() {
         Log.d(TAG, "onDestroyView");
         super.onDestroyView();
         sessionAttached = false;
@@ -67,36 +82,20 @@ public class MessageFragment extends Fragment {
         receiverName = "";
     }
 
-
-        @Override
-    public void onStart(){
-        super.onStart();
-        prepareChat();
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (!isVisibleToUser)
-            return;
-        if (sessionAttached)
-            prepareChat();
-    }
-
-    private void prepareChat(){
+    private void prepareChat() {
         Log.d(TAG, "prepareChat");
 
         //update sender and receiver information
         getSenderReceiver();
 
         //show receiver name on screen
-        if(receiverName.equals("")){
+        if (receiverName.equals("")) {
             receiverNameTextView.setText("Please select a friend to message");
-        }else{
+        } else {
             receiverNameTextView.setText(receiverName);
         }
 
-        if(receiverEmail.equals(""))
+        if (receiverEmail.equals(""))
             return;
 
         //get chatroom string
@@ -106,12 +105,12 @@ public class MessageFragment extends Fragment {
         contactFirebase(chatRoom);
     }
 
-    private void getSenderReceiver(){
+    private void getSenderReceiver() {
         SessionManager session = new SessionManager(getContext().getApplicationContext());
-        MainActivity mainActivity = (MainActivity)getActivity();
+        MainActivity mainActivity = (MainActivity) getActivity();
 
         if (myEmail.equals(session.getEmail()))
-            if(receiverEmail.equals(mainActivity.getSelectedFriendEmail()))
+            if (receiverEmail.equals(mainActivity.getSelectedFriendEmail()))
                 return;
         myEmail = session.getEmail();
         myName = session.getName();
@@ -119,16 +118,16 @@ public class MessageFragment extends Fragment {
         receiverName = mainActivity.getSelectedFriendName();
     }
 
-    private String setChatRoomInfo(){
+    private String setChatRoomInfo() {
         String chatRoom;
-        if(myEmail.compareTo(receiverEmail) < 0)
+        if (myEmail.compareTo(receiverEmail) < 0)
             chatRoom = myEmail + receiverEmail;
         else
             chatRoom = receiverEmail + myEmail;
-        return chatRoom.replaceAll("[.#$]","-");
+        return chatRoom.replaceAll("[.#$]", "-");
     }
 
-    private void contactFirebase(final String chatRoom){
+    private void contactFirebase(final String chatRoom) {
         mAuth = FirebaseAuth.getInstance();
         mAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {

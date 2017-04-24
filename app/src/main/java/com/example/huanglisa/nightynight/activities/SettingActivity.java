@@ -16,9 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedBuilding;
-import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.dialogs.UserInfoEditingDialog;
+import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
 import com.facebook.AccessToken;
@@ -37,7 +36,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -353,16 +351,6 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.google_signin_button:
-                signInButtonsClicked[0] = true;
-                googleSignIn();
-                break;
-        }
-    }
-
     public void changePhone(String curPhone) {
         Call<User> call = userApiInterface.userUpdatePhone(token, curPhone);
         call.enqueue(new Callback<User>() {
@@ -387,12 +375,6 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
             }
         });
     }
-
-    private void googleSignIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
     public void changeAddress(String curAddress) {
         Call<User> call = userApiInterface.userUpdateAddress(token, curAddress);
         call.enqueue(new Callback<User>() {
@@ -424,6 +406,16 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.google_signin_button:
+                signInButtonsClicked[0] = true;
+                googleSignIn();
+                break;
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_SIGN_IN) {
             Log.d(TAG, data.toString());
@@ -450,7 +442,10 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
     }
 
 
-
+    private void googleSignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
 
 }

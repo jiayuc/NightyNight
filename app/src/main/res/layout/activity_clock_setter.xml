@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingRight="0dp"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/ToolbarTheme"/>
 
     <com.example.huanglisa.nightynight.CustomViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"/>
 
 </LinearLayout>

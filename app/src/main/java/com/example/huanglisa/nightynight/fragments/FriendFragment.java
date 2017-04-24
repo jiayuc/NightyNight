@@ -15,14 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.huanglisa.nightynight.R;
+import com.example.huanglisa.nightynight.SessionManager;
 import com.example.huanglisa.nightynight.activities.MainActivity;
+import com.example.huanglisa.nightynight.adapters.FriendListAdapter;
 import com.example.huanglisa.nightynight.dialogs.FriendConfirmDialog;
 import com.example.huanglisa.nightynight.models.FriendItem;
-import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.models.ReceivedFriend;
-import com.example.huanglisa.nightynight.SessionManager;
-import com.example.huanglisa.nightynight.adapters.FriendListAdapter;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 import com.example.huanglisa.nightynight.rest.FriendApiInterface;
@@ -79,7 +79,7 @@ public class FriendFragment extends Fragment {
 
 
         session = new SessionManager(getContext().getApplicationContext());
-        this.mainActivity = (MainActivity)this.getActivity();
+        this.mainActivity = (MainActivity) this.getActivity();
 
         friendApiInterface = ApiClient.getClient().create(FriendApiInterface.class);
         buildingApiInterface = ApiClient.getClient().create(BuildingApiInterface.class);

@@ -24,7 +24,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
-        for(int i=0; i < NumOfTabs; i++)
+        for (int i = 0; i < NumOfTabs; i++)
             mFragments.add(i, null);
     }
 
@@ -65,7 +65,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 FriendPagerFragment tab3 = new FriendPagerFragment();
                 mFragments.set(2, tab3);
                 return tab3;
-            case  3:
+            case 3:
                 Log.d("fragment tab switch: ", "case 3");
                 if (mFragments.get(3) != null)
                     return mFragments.get(3);

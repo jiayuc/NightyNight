@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.huanglisa.nightynight.fragments.SleepClockFragment;
 import com.example.huanglisa.nightynight.fragments.WakeClockFragment;
-import com.example.huanglisa.nightynight.models.ClockItem;
-import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 /**
  * Created by huanglisa on 11/1/16.

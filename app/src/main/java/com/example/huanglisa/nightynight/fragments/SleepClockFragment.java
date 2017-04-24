@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TimePicker;
 
-import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.CustomViewPager;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.activities.ClockSetterActivity;
 import com.example.huanglisa.nightynight.adapters.ClockListAdapter;
+import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 import java.util.ArrayList;

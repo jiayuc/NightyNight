@@ -15,11 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.huanglisa.nightynight.dialogs.BuildingGenerationDialog;
-import com.example.huanglisa.nightynight.adapters.FriendViewAdapter;
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.adapters.FriendViewAdapter;
+import com.example.huanglisa.nightynight.dialogs.BuildingGenerationDialog;
+import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 

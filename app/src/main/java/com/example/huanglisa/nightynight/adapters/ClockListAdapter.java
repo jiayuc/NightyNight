@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.RecyclerViewSwitchListener;
 import com.example.huanglisa.nightynight.StatusSwitch;
+import com.example.huanglisa.nightynight.models.ClockItem;
 
 import java.util.List;
 

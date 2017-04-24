@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chat_main_f"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/chat_bottom_margin"
-    android:paddingLeft="@dimen/chat_horizontal_margin"
-    android:paddingRight="@dimen/chat_horizontal_margin"
-    android:paddingTop="@dimen/chat_top_margin"
-    tools:context="com.example.huanglisa.nightynight.fragments.ClockFragment">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/chat_main_f"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/chat_bottom_margin"
+                android:paddingLeft="@dimen/chat_horizontal_margin"
+                android:paddingRight="@dimen/chat_horizontal_margin"
+                android:paddingTop="@dimen/chat_top_margin"
+                tools:context="com.example.huanglisa.nightynight.fragments.ClockFragment">
 
     <TextView
         android:id="@+id/receiverName"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="Receiver"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_f"
@@ -31,23 +31,24 @@
         app:fabSize="mini"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/chat_main_ff"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/list_top_margin"
-        android:paddingBottom="@dimen/list_bottom_margin"
-        tools:context="com.example.huanglisa.nightynight.fragments.ClockFragment">
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/chat_main_ff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/list_bottom_margin"
+                    android:paddingTop="@dimen/list_top_margin"
+                    tools:context="com.example.huanglisa.nightynight.fragments.ClockFragment">
+
         <ListView
             android:id="@+id/list_of_messages_f"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"
             android:divider="@android:color/transparent"
-            android:dividerHeight="16dp"/>
+            android:dividerHeight="16dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"/>
     </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout

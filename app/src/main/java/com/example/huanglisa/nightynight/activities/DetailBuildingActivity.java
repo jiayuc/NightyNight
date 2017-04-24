@@ -8,11 +8,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedFriend;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.models.ReceivedFriend;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.FriendApiInterface;
 
@@ -42,6 +43,23 @@ public class DetailBuildingActivity extends AppCompatActivity {
             R.id.curtain13,
             R.id.curtain14,
             R.id.curtain15,
+    };
+    private int[] nameTags = {
+            R.id.nameTag1,
+            R.id.nameTag2,
+            R.id.nameTag3,
+            R.id.nameTag4,
+            R.id.nameTag5,
+            R.id.nameTag6,
+            R.id.nameTag7,
+            R.id.nameTag8,
+            R.id.nameTag9,
+            R.id.nameTag10,
+            R.id.nameTag11,
+            R.id.nameTag12,
+            R.id.nameTag13,
+            R.id.nameTag14,
+            R.id.nameTag15
     };
     private Intent intent;
     private String serverBuildingId;
@@ -84,6 +102,45 @@ public class DetailBuildingActivity extends AppCompatActivity {
 
                 }
                 friendList.addAll(response.body());
+                System.out.print("===friendList=====");
+                System.err.print(friendList);
+                // draw curtain and light according to friends list
+                if (friendList.size() >= 15) {
+                    Log.e(TAG, "friend list size is larger than limit 15");
+                }
+                for (int i = 0; i < friendList.size(); i++) {
+                    ReceivedFriend friend = friendList.get(i);
+                    // set name tag
+                    ((TextView) findViewById(nameTags[i])).setText(friend.name);
+                    if (friend.status == true) { //awake
+                        ((ImageView) findViewById(curtains[i])).setImageResource(R.drawable.curtain_light);
+                    } else {
+                        ((ImageView) findViewById(curtains[i])).setImageResource(R.drawable.curtain_sleep);
+                    }
+                }
+
+
+                for (int i = 0; i < curtains.length; i++) {
+                    int id = curtains[i];
+                    ImageView curtain = (ImageView) findViewById(id);
+                    final int index = i;
+                    curtain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (index < friendList.size()) {
+                                Intent intent = new Intent(getApplicationContext(), individualActivity.class);
+                                intent.putExtra("friendId", friendList.get(index).friendId);
+                                intent.putExtra("name", friendList.get(index).name);
+                                intent.putExtra("status", friendList.get(index).status);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "no friend lives here", Toast.LENGTH_LONG).show();
+                            }
+                            //finish();
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -91,38 +148,6 @@ public class DetailBuildingActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage().toString());
             }
         });
-
-        if (friendList.size() >= 15) {
-            Log.e(TAG, "friend list size is larger than limit 15");
-        }
-        for (int i = 0; i < friendList.size(); i++) {
-            ReceivedFriend friend = friendList.get(i);
-            if (friend.status) { //awake
-                ((ImageView) findViewById(curtains[i])).setImageResource(R.drawable.curtain_light);
-            }
-        }
-
-
-        for (int i = 0; i < curtains.length; i++) {
-            int id = curtains[i];
-            ImageView curtain = (ImageView) findViewById(id);
-            final int index = i;
-            curtain.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (index < friendList.size()) {
-                        Intent intent = new Intent(getApplicationContext(), individualActivity.class);
-                        intent.putExtra("friendId", friendList.get(index).friendId);
-                        intent.putExtra("name", friendList.get(index).name);
-                        intent.putExtra("status", friendList.get(index).status);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "no friend lives here", Toast.LENGTH_LONG).show();
-                    }
-                    //finish();
-                }
-            });
-        }
 
 
     }

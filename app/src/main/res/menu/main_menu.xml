@@ -15,13 +15,13 @@
                 android:id="@+id/action_setting"
                 android:icon="@android:drawable/ic_menu_preferences"
                 android:title="setting"
-                app:showAsAction="ifRoom" />
+                app:showAsAction="ifRoom"/>
 
             <item
                 android:id="@+id/action_logout"
                 android:icon="@android:drawable/ic_menu_help"
                 android:title="log out"
-                app:showAsAction="ifRoom" />
+                app:showAsAction="ifRoom"/>
 
             <item
                 android:id="@+id/menu_sign_out"

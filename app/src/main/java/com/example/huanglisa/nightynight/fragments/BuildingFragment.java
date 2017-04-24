@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.huanglisa.nightynight.dialogs.BuildingGenerationDialog;
-import com.example.huanglisa.nightynight.activities.DetailBuildingActivity;
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.activities.DetailBuildingActivity;
+import com.example.huanglisa.nightynight.dialogs.BuildingGenerationDialog;
+import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
 
@@ -58,10 +58,13 @@ public class BuildingFragment extends Fragment {
             ImageView imgV = (ImageView) v;
             if (imgV != null) {
                 clickedId = imgV.getId();
-                if (clickedId == R.id.building1)
+                if (clickedId == R.id.building1) {
                     clickedIndex = 0;
-                if (clickedId == R.id.building2)
+                    Log.d(TAG, "clicked building 0");
+                } else if (clickedId == R.id.building2) {
                     clickedIndex = 1;
+                    Log.d(TAG, "clicked building 1");
+                }
                 imgV.setImageLevel(2);
             }
 
@@ -79,6 +82,8 @@ public class BuildingFragment extends Fragment {
 
 
             if (checkBuildingExist(clickedIndex)) {
+                Log.d(TAG, "buildingList: ");
+                System.err.print(buildingList);
                 Toast.makeText(getContext(), buildingList.get(clickedIndex).name, Toast.LENGTH_LONG).show();
                 toDetailBuildingView(Integer.toString(clickedId), buildingList.get(clickedIndex));
             } else {

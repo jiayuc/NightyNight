@@ -16,7 +16,7 @@
         android:layout_marginBottom="230dp"
         android:scaleY="1.3"
         android:src="@drawable/profile_background"
-        android:translationY="-60dp" />
+        android:translationY="-60dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +26,12 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/profile"
-            app:civ_border_color="#FFFFFFFF"
-            app:civ_border_width="3dp" />
+                                                      android:id="@+id/profile_image"
+                                                      android:layout_width="150dp"
+                                                      android:layout_height="150dp"
+                                                      android:src="@drawable/profile"
+                                                      app:civ_border_color="#FFFFFFFF"
+                                                      app:civ_border_width="3dp"/>
 
         <TextView
             android:id="@+id/name"
@@ -40,7 +40,7 @@
             android:text="Lisa Huang"
             android:textColor="@color/colorWhite"
             android:textColorLink="@color/colorWhite"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:text="status:"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/status"
@@ -65,7 +65,7 @@
                 android:text="sleeping"
                 android:textColor="@color/colorWhite"
                 android:textColorLink="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
 
@@ -82,7 +82,7 @@
                 android:paddingRight="10dp"
                 android:text="20"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/follower"
@@ -91,7 +91,7 @@
                 android:layout_marginRight="20dp"
                 android:text="followers"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/following_num"
@@ -100,7 +100,7 @@
                 android:layout_marginRight="10dp"
                 android:text="30"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/followings"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:text="following"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -118,7 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:paddingRight="0dp"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/ToolbarTheme"/>
 
     <LinearLayout
         android:layout_width="300dp"
@@ -142,7 +142,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/ic_building"
-                android:tint="#1f2c4e" />
+                android:tint="#1f2c4e"/>
 
             <TextView
                 android:id="@+id/link_building"
@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?attr/colorControlHighlight"
-            android:elevation="24dp" />
+            android:elevation="24dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,7 +177,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/ic_phone_call"
-                android:tint="#1f2c4e" />
+                android:tint="#1f2c4e"/>
 
             <TextView
                 android:id="@+id/link_message"
@@ -196,7 +196,7 @@
             android:layout_width="391dp"
             android:layout_height="1dp"
             android:background="?attr/colorControlHighlight"
-            android:scaleX="1.5" />
+            android:scaleX="1.5"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -212,7 +212,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/ic_sms_message"
-                android:tint="#1f2c4e" />
+                android:tint="#1f2c4e"/>
 
             <TextView
                 android:id="@+id/link_call"
@@ -231,7 +231,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/colorControlHighlight" />
+            android:background="?attr/colorControlHighlight"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -247,7 +247,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:src="@drawable/ic_nightcap"
-                android:tint="#1f2c4e" />
+                android:tint="#1f2c4e"/>
 
             <TextView
                 android:id="@+id/link_sleep"
@@ -266,7 +266,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/colorControlHighlight" />
+            android:background="?attr/colorControlHighlight"/>
 
     </LinearLayout>
 

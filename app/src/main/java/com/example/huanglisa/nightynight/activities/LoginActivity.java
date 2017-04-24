@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.models.ReceivedBuilding;
 import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.BuildingApiInterface;
@@ -247,7 +247,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void onUserAPIResult(Call<User> call) {
-        call.enqueue(new Callback<User > () {
+        call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d(TAG, "onResponse");
@@ -265,7 +265,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
                 System.out.format("token: %s%n", response.body().token);
                 Call<List<ReceivedBuilding>> buildingCall = buildingApiInterface.getBuildings(response.body().token);
-                buildingCall.enqueue(new Callback<List<ReceivedBuilding>> () {
+                buildingCall.enqueue(new Callback<List<ReceivedBuilding>>() {
                     @Override
                     public void onResponse(Call<List<ReceivedBuilding>> call, Response<List<ReceivedBuilding>> response) {
                         if (!response.isSuccessful()) {
@@ -299,6 +299,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
+    //indicate user log in failed
+    public void onLoginFail(String message) {
+        Log.i(TAG, "onLoginFail: " + message);
+        String text = "Login failed";
+        if (message != null) {
+            text = message;
+        }
+        Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
+        _loginButton.setEnabled(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Disable going back to the MainActivity
+        moveTaskToBack(true);
+    }
+
     /**
      * Called when activity view is clicked
      *
@@ -319,39 +336,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    //indicate user log in failed
-    public void onLoginFail(String message) {
-        Log.i(TAG, "onLoginFail: " + message);
-        String text = "Login failed";
-        if (message != null) {
-            text = message;
-        }
-        Toast.makeText(getBaseContext(), text, Toast.LENGTH_LONG).show();
-        _loginButton.setEnabled(true);
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Disable going back to the MainActivity
-        moveTaskToBack(true);
-    }
-
-    public void jumpToSlider(View v) {
-        Intent intent = new Intent(getApplicationContext(), ScreenSlidePagerActivity.class);
-        startActivity(intent);
-    }
-
 
     private void googleSignIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
-
-
-
-
-
 
 
 }

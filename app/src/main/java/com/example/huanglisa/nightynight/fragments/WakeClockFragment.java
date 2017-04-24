@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TimePicker;
 
-import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.activities.ClockSetterActivity;
 import com.example.huanglisa.nightynight.adapters.ClockListAdapter;
+import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class WakeClockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // parse passed in data if any
         String oldClockEncoded = getArguments().getString("oldClockEncoded");
-        Log.e(TAG, "oldClockEncoded received: " + oldClockEncoded);
+        Log.d(TAG, "oldClockEncoded received: " + oldClockEncoded);
         // create view
         View view = inflater.inflate(R.layout.fragment_wake_clock, container, false);
         System.out.format("wakeup%n");

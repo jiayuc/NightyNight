@@ -4,9 +4,7 @@ import com.example.huanglisa.nightynight.models.ClockItem;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by jiayu on 4/24/2017.

@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.huanglisa.nightynight.R;
-import com.example.huanglisa.nightynight.models.ReceivedFriend;
 import com.example.huanglisa.nightynight.SessionManager;
+import com.example.huanglisa.nightynight.models.ReceivedFriend;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
 

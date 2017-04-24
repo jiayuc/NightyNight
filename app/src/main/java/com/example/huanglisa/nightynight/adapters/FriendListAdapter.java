@@ -5,15 +5,14 @@ package com.example.huanglisa.nightynight.adapters;
  */
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.huanglisa.nightynight.models.FriendItem;
 import com.example.huanglisa.nightynight.R;
+import com.example.huanglisa.nightynight.models.FriendItem;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Fr
         return friendList.size();
     }
 
-    public class FriendListViewHolder extends RecyclerView.ViewHolder{
+    public class FriendListViewHolder extends RecyclerView.ViewHolder {
         public TextView name, status;
         public ImageView profile;
         private String TAG = "FriendListViewHolder";

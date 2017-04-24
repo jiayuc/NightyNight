@@ -22,6 +22,22 @@ android {
             jcenter()
         }
     }
+
+    // Each product flavor you configure can override properties in the
+    // defaultConfig {} block. To learn more, go to Configure Product Flavors.
+//    defaultConfig {
+//        // Specifies the application ID for the test APK.
+//        testApplicationId "com.test.foo"
+//        // Specifies the fully-qualified class name of the test instrumentation runner.
+//        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+//        // If set to 'true', enables the instrumentation class to start and stop profiling.
+//        // If set to false (default), profiling occurs the entire time the instrumentation
+//        // class is running.
+//        testHandleProfiling true
+//        // If set to 'true', indicates that the Android system should run the instrumentation
+//        // class as a functional test. The default value is 'false'
+//        testFunctionalTest true
+//    }
 }
 
 
