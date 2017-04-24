@@ -11,6 +11,7 @@ import com.example.huanglisa.nightynight.models.ClockItem;
 import com.example.huanglisa.nightynight.CustomViewPager;
 import com.example.huanglisa.nightynight.adapters.PagerClockSetterAdapter;
 import com.example.huanglisa.nightynight.R;
+import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 public class ClockSetterActivity extends AppCompatActivity {
     private static final String TAG = "ClockSetterActivity";
@@ -24,9 +25,13 @@ public class ClockSetterActivity extends AppCompatActivity {
 
         // retrieve passed in params if any
         Bundle extras = getIntent().getExtras();
+        String params = "";
         if (extras != null) {
-            String value = extras.getString("EXTRA_SESSION_ID");
-            Log.e(TAG, "received param: " + value);
+            params = extras.getString("clockInfo");
+            ClockMsgPacker packer = new ClockMsgPacker();
+            ClockItem clockOld = packer.StringToClock(params);
+
+            Log.e(TAG, "received param: " + clockOld.getId() + " sleep: " + clockOld.getSleepTime() + " wake: " + clockOld.getWakeupTime());
             //The key argument here must match that used in the other activity
         }
 
@@ -40,7 +45,7 @@ public class ClockSetterActivity extends AppCompatActivity {
 
         //create pager
         viewPager = (CustomViewPager) findViewById(R.id.pager);
-        PagerClockSetterAdapter pageAdapter = new PagerClockSetterAdapter(getSupportFragmentManager(), 2);
+        PagerClockSetterAdapter pageAdapter = new PagerClockSetterAdapter(getSupportFragmentManager(), 2, params);
         viewPager.setAdapter(pageAdapter);
         viewPager.setCurrentItem(0);
         viewPager.setPagingEnabled(false);

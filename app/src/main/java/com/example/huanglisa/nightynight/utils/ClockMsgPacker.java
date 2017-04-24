@@ -9,14 +9,18 @@ import com.example.huanglisa.nightynight.models.ClockItem;
 public class ClockMsgPacker {
     /**
      * Convert clockitem to string format of
-     * sleep_hour: sleep_min: wakup_hour: wakeup_min
+     * sleep_hour: sleep_min: wakup_hour: wakeup_min : id
      *
      * @param clock
      * @return string representing clockItem info
      */
     public String clockToString(ClockItem clock) {
         String ret = "";
-
+        ret += Integer.toString(clock.getSleepHour()) + ":";
+        ret += Integer.toString(clock.getSleepMin()) + ":";
+        ret += Integer.toString(clock.getWakeupHour()) + ":";
+        ret += Integer.toString(clock.getWakupMin()) + ":";
+        ret += clock.getId();
         return ret;
     }
 
@@ -29,9 +33,14 @@ public class ClockMsgPacker {
     public ClockItem StringToClock(String clockStr) {
         String[] times = clockStr.split(":");
         System.out.print("split to get times: ");
-        System.out.print(times);
 
         ClockItem clock = new ClockItem();
+        clock.setSleepHour(Integer.valueOf(times[0]));
+        clock.setSleepMin(Integer.valueOf(times[1]));
+        clock.setWakeupHour(Integer.valueOf(times[2]));
+        clock.setWakeupMin(Integer.valueOf(times[3]));
+        clock.setId(times[4]);
+
         return clock;
     }
 

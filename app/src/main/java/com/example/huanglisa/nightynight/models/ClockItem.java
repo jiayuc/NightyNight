@@ -31,6 +31,10 @@ public class ClockItem {
         return this.id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setWakeupMin(int wakeup_min) {
         this.wakeup_min = wakeup_min;
     }
@@ -86,4 +90,5 @@ public class ClockItem {
     public void setStatus(boolean onOff) {
         this.ifTurnedOn = onOff;
     }
+
 }

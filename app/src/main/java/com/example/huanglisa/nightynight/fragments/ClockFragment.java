@@ -38,6 +38,7 @@ import com.example.huanglisa.nightynight.RecyclerViewSwitchListener;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.ClockApiInterface;
 import com.example.huanglisa.nightynight.rest.UserApiInterface;
+import com.example.huanglisa.nightynight.utils.ClockMsgPacker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,6 +55,8 @@ import retrofit2.Response;
 public class ClockFragment extends Fragment implements RecyclerViewSwitchListener {
     private static final String TAG = "ClockFragment";
     private static final int REQUEST_ADD = 1;
+    private static final int REQUEST_CHANGE = 2;
+
     private List<ClockItem> clockList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ClockListAdapter clockAdapter;
@@ -71,13 +74,17 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
     private Intent alarmSleepReceiverIntent;
 
     private Paint p = new Paint();
-
+    private Integer positionClicked;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "ClockFragment onActivityResult ");
         if (data != null) {
             if (requestCode == REQUEST_ADD) {
                 System.out.format("add clock item%n");
                 addClockData(data.getExtras().getInt("sleepHour"), data.getExtras().getInt("sleepMin"), data.getExtras().getInt("wakeupHour"), data.getExtras().getInt("wakeupMin"));
+            } else if (requestCode == REQUEST_CHANGE) {
+                System.out.format("Change clock item%n");
+                updateClockData(data.getExtras().getString("id"), data.getExtras().getInt("sleepHour"), data.getExtras().getInt("sleepMin"), data.getExtras().getInt("wakeupHour"), data.getExtras().getInt("wakeupMin"));
             }
         }
     }
@@ -103,19 +110,20 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
                 new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        positionClicked = position;
                         // TODO Handle item click
                         ClockItem clock = clockList.get(position);
                         TimePicker picker = new TimePicker(context);
                         picker.setHour(clock.getSleepHour());
                         picker.setMinute(clock.getSleepMin());
 
-
-                        Log.e(TAG, "clock item  at pos " + position + " id: " + clock.getId());
+                        Log.d(TAG, "clock item  at pos " + position + " id: " + clock.getId());
                         Toast.makeText(context, clock.getId() + " is selected!", Toast.LENGTH_SHORT).show();
                         // jump to activity
-                        Intent intent = new Intent(context, ClockSetterActivity.class);
-                        intent.putExtra("EXTRA_SESSION_ID", "hello");
-                        startActivity(intent);
+                        Intent intent = new Intent(getActivity(), ClockSetterActivity.class);
+                        ClockMsgPacker packer = new ClockMsgPacker();
+                        intent.putExtra("clockInfo", packer.clockToString(clock));
+                        startActivityForResult(intent, REQUEST_CHANGE);
                     }
                 })
         );
@@ -329,6 +337,43 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
         });
 
     }
+
+
+    /**
+     * update clock data to database, then notify data change on successful response
+     *
+     * @param id
+     * @param sleepHour
+     * @param sleepMin
+     * @param wakeHour
+     * @param wakeMin
+     */
+    private void updateClockData(String id, int sleepHour, int sleepMin, int wakeHour, int wakeMin) {
+
+        Call<ReceivedClock> call = clockApiInterface.updateClock(((MainActivity) getActivity()).session.getToken(), sleepHour, sleepMin, wakeHour, wakeMin, id);
+        call.enqueue(new Callback<ReceivedClock>() {
+            @Override
+            public void onResponse(Call<ReceivedClock> call, Response<ReceivedClock> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(TAG, "failed to update clock item " + response.message());
+                    return;
+                }
+
+
+                ClockItem cItem = new ClockItem(response.body().sleepHour, response.body().sleepMin, response.body().wakeHour, response.body().wakeMin, response.body().id, false);
+                clockList.set(positionClicked, cItem);
+                System.out.format("notify clock list data change, new list size: %d%n", clockList.size());
+                clockAdapter.notifyItemChanged(positionClicked, null);
+            }
+
+            @Override
+            public void onFailure(Call<ReceivedClock> call, Throwable t) {
+                Log.e(TAG, "failed to add clock item (onFailure) " + t.getMessage());
+            }
+        });
+
+    }
+
 
 
     @Override
