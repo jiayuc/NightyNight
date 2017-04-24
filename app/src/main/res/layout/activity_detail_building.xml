@@ -55,7 +55,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="120dp" />
+        android:translationY="210dp" />
 
     <ImageView
         android:id="@+id/curtain2"
@@ -67,7 +67,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="390dp" />
+        android:translationY="480dp" />
 
     <ImageView
         android:id="@+id/curtain3"
@@ -79,7 +79,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="300dp" />
+        android:translationY="390dp" />
 
 
     <ImageView
@@ -92,7 +92,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="490dp" />
+        android:translationY="580dp" />
 
     <ImageView
         android:id="@+id/curtain5"
@@ -104,7 +104,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="65dp"
-        android:translationY="210dp" />
+        android:translationY="300dp" />
 
 
     <ImageView
@@ -117,7 +117,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="120dp" />
+        android:translationY="210dp" />
 
     <ImageView
         android:id="@+id/curtain7"
@@ -129,7 +129,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="390dp" />
+        android:translationY="480dp" />
 
     <ImageView
         android:id="@+id/curtain8"
@@ -141,7 +141,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="300dp" />
+        android:translationY="390dp" />
 
 
     <ImageView
@@ -154,7 +154,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="490dp" />
+        android:translationY="580dp" />
 
     <ImageView
         android:id="@+id/curtain10"
@@ -166,7 +166,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="154dp"
-        android:translationY="210dp" />
+        android:translationY="300dp" />
 
 
     <ImageView
@@ -179,7 +179,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="120dp" />
+        android:translationY="210dp" />
 
     <ImageView
         android:id="@+id/curtain12"
@@ -191,7 +191,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="390dp" />
+        android:translationY="480dp" />
 
     <ImageView
         android:id="@+id/curtain13"
@@ -203,7 +203,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="300dp" />
+        android:translationY="390dp" />
 
 
     <ImageView
@@ -216,7 +216,7 @@
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="490dp" />
+        android:translationY="580dp" />
 
     <ImageView
         android:id="@+id/curtain15"
@@ -224,12 +224,23 @@
 
         android:layout_height="67dp"
         android:clickable="true"
-        android:elevation="21dp"
+        android:elevation="221dp"
         android:scaleX="0.8"
         android:scaleY="1.1"
         android:src="@drawable/curtain"
         android:translationX="245dp"
-        android:translationY="210dp" />
+        android:translationY="300dp" />
+    <!--<ImageView-->
+        <!--android:id="@+id/curtain15"-->
+        <!--android:layout_width="49dp"-->
 
+        <!--android:layout_height="67dp"-->
+        <!--android:clickable="true"-->
+        <!--android:elevation="21dp"-->
+        <!--android:scaleX="0.8"-->
+        <!--android:scaleY="1.1"-->
+        <!--android:src="@drawable/curtain"-->
+        <!--android:translationX="245dp"-->
+        <!--android:translationY="210dp" />-->
 
 </FrameLayout>
