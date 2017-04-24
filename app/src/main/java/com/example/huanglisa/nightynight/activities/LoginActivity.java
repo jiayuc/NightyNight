@@ -308,7 +308,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         System.out.format(t.getMessage());
                     }
                 });
-                onLoginSucess(response.body().email, response.body().name, response.body().token, response.body().password);
+                onLoginSucess(response.body().name, response.body().email, response.body().token, response.body().password);
             }
 
             @Override

@@ -80,7 +80,7 @@ public class ClockFragment extends Fragment implements RecyclerViewSwitchListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        Log.d(TAG, "onCreateView: "+this.toString());
         //API
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
         clockApiInterface = ApiClient.getClient().create(ClockApiInterface.class);

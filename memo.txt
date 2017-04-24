@@ -13,5 +13,7 @@
 - google client ID
     803304289559-nc7akghotu75kmp01cb28vgc24fpc2sn.apps.googleusercontent.com
 
+- app key hash (for FB login)
+    http://stackoverflow.com/questions/23674131/android-facebook-integration-invalid-key-hash
 
     cht7QZIHW88:APA91bHzJ-plIAhjG_BBBW9V9A2DFryRXqoDn5dIZKhsteUgwyent4Iy9LMVZ1LHsxqm7ka9QDbAQ2L62x4eh4bMt-zAfAkqxzBRjPvMrtpgQ9fko7toa60O-cYXAdFzvnT_nINYGGl3

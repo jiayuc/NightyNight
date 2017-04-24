@@ -5,6 +5,7 @@ package com.example.huanglisa.nightynight.adapters;
  */
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,17 +51,16 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Fr
         return friendList.size();
     }
 
-    public class FriendListViewHolder extends RecyclerView.ViewHolder {
+    public class FriendListViewHolder extends RecyclerView.ViewHolder{
         public TextView name, status;
         public ImageView profile;
+        private String TAG = "FriendListViewHolder";
 
         public FriendListViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.friend_name);
             status = (TextView) view.findViewById(R.id.friend_status);
             profile = (ImageView) view.findViewById(R.id.friend_profile);
-
-
         }
     }
 }
