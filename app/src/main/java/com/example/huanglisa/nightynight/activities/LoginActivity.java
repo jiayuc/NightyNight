@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestId()
+                .requestProfile()
                 .requestIdToken(GOOGLE_CLIENT_ID) // pass the OAuth 2.0 client ID that was created for server
                 .build();
 
@@ -118,12 +119,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // register facebook loginNative cb
         callbackManager = CallbackManager.Factory.create();
         LoginButton loginButtonFB = (LoginButton) findViewById(R.id.login_button);
-        loginButtonFB.setReadPermissions("email");
+        loginButtonFB.setReadPermissions("email", "user_photos");
         loginButtonFB.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(final LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
-                Log.d(TAG, "Front end fb Login success, " + loginResult.toString()); // + "\n\n token" + accessToken.getToken());
+
+                Log.d(TAG, "Front end fb Login success, " + loginResult.toString() + "\ntoken\n" + accessToken.getToken()
+                        + "\nuser ID: \n" + accessToken.getUserId());
                 // request user access from API
                 Call<User> call = userApiInterface.userLogInViaFacebook(accessToken.getUserId(), accessToken.getToken());
                 onUserAPIResult(call);
@@ -226,7 +229,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d(TAG, "Google front-end login success, get info: " + acct.getDisplayName() + acct.getId());
-            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getEmail(), acct.getDisplayName());
+            String pictureURL = acct.getPhotoUrl().toString();
+            Log.e("pictureURL", pictureURL);
+
+            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getIdToken(), acct.getEmail(), acct.getDisplayName(), pictureURL);
             onUserAPIResult(call);
         } else {
             Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());

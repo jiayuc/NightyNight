@@ -1,7 +1,10 @@
 package com.example.huanglisa.nightynight.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.dialogs.UserInfoEditingDialog;
 import com.example.huanglisa.nightynight.models.User;
@@ -36,7 +40,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,15 +54,21 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
     // constants for google login in
     private static final String GOOGLE_CLIENT_ID = "803304289559-atpfnn6je36a6qv1q60boe1qds492j8m.apps.googleusercontent.com";
     private static final int RC_SIGN_IN = 1;
+    // constants for img request methods
+    private static final int CAMERA_REQUEST = 1;
+    private static final int RESULT_LOAD_IMAGE = 2;
+
     public boolean[] signInButtonsClicked = {false, false};
     CallbackManager callbackManager;
     private TextView name, status, address, phone;
+    private CircleImageView profilePic;
     private String token;
     private Switch statusSwitch;
     private UserApiInterface userApiInterface;
     private ImageView editName, editPhone, editAddress;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton signInButtonGoogle;
+    private CircleImageView editPic;
 
     /**
      * On create setting Activity
@@ -80,19 +93,37 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
 
         userApiInterface = ApiClient.getClient().create(UserApiInterface.class);
 
+        // edit buttons
+        editPic = (CircleImageView) findViewById(R.id.change_pic);
         editName = (ImageView) findViewById(R.id.editName);
         editPhone = (ImageView) findViewById(R.id.editPhone);
         editAddress = (ImageView) findViewById(R.id.editAddress);
 
+        // user info to be filled back backend data
         name = (TextView) findViewById(R.id.userName);
         status = (TextView) findViewById(R.id.userStatus);
         address = (TextView) findViewById(R.id.userAddress);
         phone = (TextView) findViewById(R.id.userPhone);
+        profilePic = (CircleImageView) findViewById(R.id.profile_image);
+
+
         statusSwitch = (Switch) findViewById(R.id.statusSwitch);
         Intent intent = getIntent();
         token = intent.getExtras().getString("token");
         getUserInfo(token);
+        // register cb for photo edit button
+        editPic.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.v(TAG, " click picture edit");
+                //TODO
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
 
+            }
+        });
 
         editName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -188,7 +219,9 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
                 status.setText(convertStatus(response.body().status));
                 address.setText(response.body().address);
                 phone.setText(response.body().phone);
+                Log.e("getUserInfo", response.body().pictureURL);
 
+                Glide.with(getApplicationContext()).load(response.body().pictureURL).into(profilePic);
             }
 
             @Override
@@ -375,6 +408,8 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
             }
         });
     }
+
+
     public void changeAddress(String curAddress) {
         Call<User> call = userApiInterface.userUpdateAddress(token, curAddress);
         call.enqueue(new Callback<User>() {
@@ -406,16 +441,6 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.google_signin_button:
-                signInButtonsClicked[0] = true;
-                googleSignIn();
-                break;
-        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_SIGN_IN) {
             Log.d(TAG, data.toString());
@@ -427,13 +452,23 @@ public class SettingActivity extends AppCompatActivity implements GoogleApiClien
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.google_signin_button:
+                signInButtonsClicked[0] = true;
+                googleSignIn();
+                break;
+        }
+    }
+
     private void handleGoogleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleGoogleSignInResult:" + result.isSuccess() + result.getStatus());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d(TAG, "Google front-end login success, get info: " + acct.getDisplayName() + acct.getId());
-            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getEmail(), acct.getDisplayName());
+            Call<User> call = userApiInterface.userLogInViaGoogle(acct.getId(), acct.getIdToken(), acct.getEmail(), acct.getDisplayName(), acct.getPhotoUrl().toString());
             onUserAPIResult(call);
         } else {
             Log.w(TAG, "google login failed" + result.getStatus().getStatusMessage());

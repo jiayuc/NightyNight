@@ -49,8 +49,10 @@
             android:dividerHeight="16dp"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"/>
+
     </RelativeLayout>
 
+    <!-- msg input area -->
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

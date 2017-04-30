@@ -1,6 +1,7 @@
 package com.example.huanglisa.nightynight.rest;
 
 import com.example.huanglisa.nightynight.models.ReceivedFriend;
+import com.example.huanglisa.nightynight.models.User;
 
 import java.util.List;
 
@@ -19,9 +20,10 @@ public interface FriendApiInterface {
     @GET("friend")
     Call<List<ReceivedFriend>> getFriends(@Header("x-zumo-auth") String authorization);
 
+    //TODO: ADD AUTH
     @FormUrlEncoded
     @POST("friend/individual")
-    Call<ReceivedFriend> getFriend(@Header("x-zumo-auth") String authorization, @Field("friendId") String friendId);
+    Call<User> getFriend(@Field("friendId") String friendId);
 
     @FormUrlEncoded
     @POST("friend")

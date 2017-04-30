@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (!checkPasswordCorrectness(password, reEnterPassword)) {
             return;
         }
-        User user = new User(email, password, name, address, phone, true);
+        User user = new User(email, password, name, address, phone, true, "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png");
         Call<User> call = userApiInterface.userSignUp(user);
         call.enqueue(new Callback<User>() {
             @Override

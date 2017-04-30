@@ -32,7 +32,7 @@ public interface UserApiInterface {
     // google login API
     @FormUrlEncoded
     @POST("user/gg-access")
-    Call<User> userLogInViaGoogle(@Field("token") String token, @Field("email") String email, @Field("name") String name);
+    Call<User> userLogInViaGoogle(@Field("id") String id, @Field("token") String token, @Field("email") String email, @Field("name") String name, @Field("pictureURL") String pictureURL);
 
     @PUT("user")
     Call<User> userSignUp(@Body User user);

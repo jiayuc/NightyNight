@@ -12,8 +12,9 @@ public class User {
     public String token;
     public String password;
     public boolean status;
+    public String pictureURL;
 
-    public User(String email, String password, String name, String address, String phone, boolean status) {
+    public User(String email, String password, String name, String address, String phone, boolean status, String pictureURL) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -21,6 +22,7 @@ public class User {
         this.phone = phone;
         this.token = null;
         this.status = status;
+        this.pictureURL = pictureURL;
     }
 
     public void setToken(String token) {

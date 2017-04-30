@@ -180,7 +180,7 @@
                 android:tint="#1f2c4e"/>
 
             <TextView
-                android:id="@+id/link_message"
+                android:id="@+id/call_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="40dp"
@@ -215,7 +215,7 @@
                 android:tint="#1f2c4e"/>
 
             <TextView
-                android:id="@+id/link_call"
+                android:id="@+id/message_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="40dp"
