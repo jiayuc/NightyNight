@@ -161,12 +161,6 @@ public class FriendFragment extends Fragment {
                 Log.e(TAG, t.getMessage().toString());
             }
         });
-        /*FriendItem fItem = new FriendItem("1", "Lisa", true);
-        friendList.add(fItem);
-
-        fItem = new FriendItem("2", "Nicole", true);
-        friendList.add(fItem);*/
-
 
     }
 

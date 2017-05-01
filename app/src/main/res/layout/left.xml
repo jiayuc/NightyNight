@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginBottom="5dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/textview"
         android:paddingBottom="8dp"
@@ -18,5 +17,29 @@
         android:paddingTop="5dp"
         android:text="Sample left msg"
         android:textColor="#000"/>
+
+    <!--<TextView-->
+    <!--android:id="@+id/message_user"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="left"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingTop="30dp"-->
+
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:text="Sample left user"-->
+    <!--android:textStyle="normal|bold"/>-->
+
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+
+        android:paddingTop="30dp"
+        android:text="Sample left time"/>
 
 </RelativeLayout>

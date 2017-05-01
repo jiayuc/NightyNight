@@ -11,13 +11,33 @@
                 android:paddingTop="@dimen/chat_top_margin"
                 tools:context="com.example.huanglisa.nightynight.fragments.ClockFragment">
 
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                  android:id="@+id/profile_image"
+                                                  android:layout_width="50dp"
+                                                  android:layout_height="50dp"
+                                                  android:src="@drawable/chat"
+                                                  app:civ_border_color="#FFFFFFFF"
+                                                  app:civ_border_width="3dp"/>
     <TextView
         android:id="@+id/receiverName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:layout_toRightOf="@id/profile_image"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:text="Receiver"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                  android:id="@+id/status_img"
+                                                  android:layout_width="50dp"
+                                                  android:layout_height="50dp"
+                                                  android:layout_alignParentRight="true"
+                                                  app:civ_border_color="#FFFFFFFF"
+                                                  app:civ_border_width="3dp"/>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_f"

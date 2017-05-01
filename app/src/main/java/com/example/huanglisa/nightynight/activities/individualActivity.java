@@ -17,7 +17,6 @@ import com.example.huanglisa.nightynight.R;
 import com.example.huanglisa.nightynight.models.User;
 import com.example.huanglisa.nightynight.rest.ApiClient;
 import com.example.huanglisa.nightynight.rest.FriendApiInterface;
-import com.example.huanglisa.nightynight.rest.UserApiInterface;
 
 import java.io.IOException;
 
@@ -117,10 +116,6 @@ public class individualActivity extends AppCompatActivity {
                     }
                 });
 
-//                address.setText(response.body().address);
-//                phone.setText(response.body().phone);
-//                Log.e("getUserInfo", response.body().pictureURL);
-//
             }
 
             @Override
