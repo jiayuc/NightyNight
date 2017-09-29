@@ -34,7 +34,7 @@ You can add/delete/edit your alarm clocks.
 
 ### Edit your profile
 The hamburger menu enables user to logout or edit their profile. 
-![alt text](Nighty-night-screenshots/13.jpg "Edit your own profile")
+![alt text](Nighty-night-screenshots/13.png "Edit your own profile")
 
 
 
