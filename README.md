@@ -25,7 +25,8 @@ friends to chat or leave good morning messages for them to find out the next day
 ![alt text](Nighty-night-screenshots/8.jpg "Chat with friend")
 
 ### Add alarm clocks
-You can add/delete/edit your alarm clocks. 
+You can add/delete/edit your alarm clocks.
+<br />
 ![alt text](Nighty-night-screenshots/9.jpg "Alarm clock list 1")
 ![alt text](Nighty-night-screenshots/10.jpg "Choose sleep time")
 ![alt text](Nighty-night-screenshots/11.jpg "Choose wakeup time")
